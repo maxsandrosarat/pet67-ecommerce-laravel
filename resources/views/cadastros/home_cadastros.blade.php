@@ -8,45 +8,45 @@
                 <div class="card-body">
                     <h5>Produtos</h5>
                     <p class="card-text">
-                        Cadastre seus produtos!
+                        Gerencie seus Produtos!
                     </p>
-                    <a href="/admin/produtos" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/produtos" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
             <div class="card border border-primary">
                 <div class="card-body">
                     <h5>Categorias</h5>
                     <p class="card-text">
-                        Cadastre suas categorias!
+                        Gerencie suas Categorias!
                     </p>
-                    <a href="/admin/categorias" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/categorias" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
             <div class="card border border-primary">
                 <div class="card-body">
                     <h5>Marcas</h5>
                     <p class="card-text">
-                        Cadastre suas marcas! 
+                        Gerencie suas Marcas! 
                     </p>
-                    <a href="/admin/marcas" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/marcas" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
             <div class="card border border-primary">
                 <div class="card-body">
                     <h5>Tipos de Animais</h5>
                     <p class="card-text">
-                        Cadastre seus tipos! 
+                        Gerencie seus Tipos de Animais! 
                     </p>
-                    <a href="/admin/tiposAnimais" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/tiposAnimais" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
             <div class="card border border-primary">
                 <div class="card-body">
                     <h5>Cupons de Desconto</h5>
                     <p class="card-text">
-                        Cadastre seus Cupons de Desconto! 
+                        Gerencie seus Cupons de Desconto! 
                     </p>
-                    <a href="/admin/cuponsDesconto" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/cuponsDesconto" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
         </div>
@@ -58,18 +58,18 @@
                 <div class="card-body">
                     <h5>Anúncios</h5>
                     <p class="card-text">
-                        Cadastre seus anúncios! 
+                        Gerencie seus Anúncios! 
                     </p>
-                    <a href="/admin/anuncios" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/anuncios" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
             <div class="card border border-primary">
                 <div class="card-body">
-                    <h5>Serviços</h5>
+                    <h5>Animais</h5>
                     <p class="card-text">
-                        Cadastre seus serviços!
+                        Gerencie seus Animais!
                     </p>
-                    <a href="/admin/servicos" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/animais" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
             <div class="card border border-primary">

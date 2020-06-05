@@ -73,6 +73,16 @@
                                                 <option value="{{$cat->id}}">{{$cat->nome}}</option>
                                             @endforeach
                                         </select>
+                                        <h5>Ativo?</h5>
+                                        <input type="radio" id="sim" name="ativo" value="sim" required>
+                                        <label for="sim">Sim</label>
+                                        <input type="radio" id="nao" name="ativo" value="nao" required>
+                                        <label for="nao">Não</label>
+                                        <h5>Promoção?</h5>
+                                        <input type="radio" id="sim" name="promocao" value="1" required>
+                                        <label for="sim">Sim</label>
+                                        <input type="radio" id="nao" name="promocao" value="0" required>
+                                        <label for="nao">Não</label>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary btn-sn">Salvar</button>
@@ -138,6 +148,8 @@
                         <th>Preço</th>
                         <th>Estoque</th>
                         <th>Categoria</th>
+                        <th>Ativo</th>
+                        <th>Promoção</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -169,6 +181,8 @@
                         <td>{{ 'R$ '.number_format($prod->preco, 2, ',', '.')}}</td>
                         <td>{{$prod->estoque}}</td>
                         <td>{{$prod->categoria->nome}}</td>
+                        <td>@if($prod->ativo=='1') Sim @else Não @endif</td>
+                        <td>@if($prod->promocao=='1') Sim @else Não @endif</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal{{$prod->id}}" data-toggle="tooltip" data-placement="left" title="Editar">
                                 <i class="material-icons md-48">edit</i>
@@ -237,6 +251,16 @@
                                                                 <option value="{{$cat->id}}">{{$cat->nome}}</option>
                                                             @endforeach
                                                         </select>
+                                                        <h5>Ativo?</h5>
+                                                        <input type="radio" id="sim" name="ativo" value="1" @if($prod->ativo=="1") checked @endif required>
+                                                        <label for="sim">Sim</label>
+                                                        <input type="radio" id="nao" name="ativo" value="0" @if($prod->ativo=="0") checked @endif required>
+                                                        <label for="nao">Não</label>
+                                                        <h5>Promoção?</h5>
+                                                        <input type="radio" id="sim" name="promocao" value="1" @if($prod->promocao=="1") checked @endif required>
+                                                        <label for="sim">Sim</label>
+                                                        <input type="radio" id="nao" name="promocao" value="0" @if($prod->promocao=="0") checked @endif required>
+                                                        <label for="nao">Não</label>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-primary btn-sn">Salvar</button>

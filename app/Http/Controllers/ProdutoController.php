@@ -56,6 +56,12 @@ class ProdutoController extends Controller
         if($request->input('categoria')!=""){
             $prod->categoria_id = $request->input('categoria');
         }
+        if($request->input('ativo')!=""){
+            $prod->ativo = $request->input('ativo');
+        }
+        if($request->input('promocao')!=""){
+            $prod->promocao = $request->input('promocao');
+        }
         $prod->save();
         return back();
     }
@@ -93,6 +99,12 @@ class ProdutoController extends Controller
             if($request->input('categoria')!=""){
                 $prod->categoria_id = $request->input('categoria');
             }
+            if($request->input('ativo')!=""){
+                $prod->ativo = $request->input('ativo');
+            }
+            if($request->input('promocao')!=""){
+                $prod->promocao = $request->input('promocao');
+            }
             $prod->save();
         }
         return back();
@@ -102,6 +114,7 @@ class ProdutoController extends Controller
     {
         $prod = Produto::find($id);
         if(isset($prod)){
+            Storage::disk('public')->delete($prod->foto);
             $prod->delete();
         }
         return back();

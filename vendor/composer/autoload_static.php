@@ -466,6 +466,7 @@ class ComposerStaticInit485a9c96d1ce66e46972af3c80879a4d
 
     public static $classMap = array (
         'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
+        'App\\Animal' => __DIR__ . '/../..' . '/app/Animal.php',
         'App\\Anuncio' => __DIR__ . '/../..' . '/app/Anuncio.php',
         'App\\Categoria' => __DIR__ . '/../..' . '/app/Categoria.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
@@ -486,6 +487,7 @@ class ComposerStaticInit485a9c96d1ce66e46972af3c80879a4d
         'App\\Http\\Controllers\\CategoriaController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoriaController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CupomDescontoController' => __DIR__ . '/../..' . '/app/Http/Controllers/CupomDescontoController.php',
+        'App\\Http\\Controllers\\EnderecoController' => __DIR__ . '/../..' . '/app/Http/Controllers/EnderecoController.php',
         'App\\Http\\Controllers\\EstoqueController' => __DIR__ . '/../..' . '/app/Http/Controllers/EstoqueController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndexController.php',
@@ -510,6 +512,9 @@ class ComposerStaticInit485a9c96d1ce66e46972af3c80879a4d
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\ServicoBanho' => __DIR__ . '/../..' . '/app/ServicoBanho.php',
+        'App\\ServicoEstetica' => __DIR__ . '/../..' . '/app/ServicoEstetica.php',
+        'App\\ServicoVeterinaria' => __DIR__ . '/../..' . '/app/ServicoVeterinaria.php',
         'App\\TipoAnimal' => __DIR__ . '/../..' . '/app/TipoAnimal.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',

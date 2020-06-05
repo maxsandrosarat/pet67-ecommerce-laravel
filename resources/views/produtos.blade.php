@@ -1,4 +1,4 @@
-@extends('layouts.app_principal', ["current"=>"home"])
+@extends('layouts.app_principal', ["current"=>"produtos"])
 
 @section('body')
   <div class="row">

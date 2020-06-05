@@ -24,10 +24,11 @@ class CreateProdutosTable extends Migration
             $table->float('preco');
             $table->integer('estoque');
             $table->unsignedBigInteger('categoria_id');
+            $table->boolean('ativo')->default(true);
+            $table->boolean('promocao')->default(false);
             $table->foreign('tipo_animal_id')->references('id')->on('tipo_animals');
             $table->foreign('marca_id')->references('id')->on('marcas');
             $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

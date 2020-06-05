@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Animal;
 use App\Anuncio;
 use Illuminate\Http\Request;
 use App\Produto;
@@ -14,12 +15,25 @@ class IndexController extends Controller
     public function index()
     {
         $tipo = "painel";
+        $pagina = "promocao";
+        $prods = Produto::where('ativo',true)->where('promocao',true)->paginate(12);
+        $tipos = TipoAnimal::orderBy('nome')->get();
+        $marcas = Marca::orderBy('nome')->get();
+        $cats = Categoria::orderBy('nome')->get();
+        $anuncios = Anuncio::where('ativo','sim')->get();
+        return view('welcome',compact('tipo','pagina','prods','tipos','marcas','cats','anuncios'));
+    }
+
+    public function produtos()
+    {
+        $tipo = "painel";
+        $pagina = "produto";
         $prods = Produto::where('ativo',true)->paginate(12);
         $tipos = TipoAnimal::orderBy('nome')->get();
         $marcas = Marca::orderBy('nome')->get();
         $cats = Categoria::orderBy('nome')->get();
         $anuncios = Anuncio::where('ativo','sim')->get();
-        return view('welcome',compact('tipo','prods','tipos','marcas','cats','anuncios'));
+        return view('produtos',compact('tipo','pagina','prods','tipos','marcas','cats','anuncios'));
     }
 
     public function buscar(Request $request)
@@ -131,10 +145,17 @@ class IndexController extends Controller
             }
         }
         $tipo = "filtro";
-        $anuncios = Anuncio::where('ativo','sim')->get();
+        $pagina = "produto";
+        $anuncios = Anuncio::where('ativo',true)->get();
         $tipos = TipoAnimal::all();
         $marcas = Marca::all();
         $cats = Categoria::all();
-        return view('welcome',compact('tipo','prods','tipos','marcas','cats','anuncios'));
+        return view('produtos',compact('tipo','pagina','prods','tipos','marcas','cats','anuncios'));
+    }
+
+    public function animais()
+    {
+        $animais = Animal::where('ativo',true)->get();
+        return view('animais',compact('animais'));
     }
 }

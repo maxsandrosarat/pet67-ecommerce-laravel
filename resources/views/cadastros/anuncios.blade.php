@@ -30,10 +30,10 @@
                                 <label for="link">Link</label>
                                 <input type="text" class="form-control" name="link" id="link" placeholder="Exemplo: https://pet67.com.br" required>
                                 <br>
-                                <h6>Anúncio Ativo?</h6>
-                                <input type="radio" id="sim" name="ativo" value="sim" required>
+                                <h5>Anúncio Ativo?</h5>
+                                <input type="radio" id="sim" name="ativo" value="1" required>
                                 <label for="sim">Sim</label>
-                                <input type="radio" id="nao" name="ativo" value="nao" required>
+                                <input type="radio" id="nao" name="ativo" value="0" required>
                                 <label for="nao">Não</label>
                             </div>
                     </div>
@@ -112,10 +112,10 @@
                                                 <label for="link">Link</label>
                                                 <input type="text" class="form-control" name="link" id="link" value="{{$anuncio->link}}" required>
                                                 <br>
-                                                <h6>Anúncio Ativo?</h6>
-                                                <input type="radio" id="sim" name="ativo" value="sim" @if($anuncio->ativo=="sim") checked @endif required>
+                                                <h5>Anúncio Ativo?</h5>
+                                                <input type="radio" id="sim" name="ativo" value="1" @if($anuncio->ativo=="sim") checked @endif required>
                                                 <label for="sim">Sim</label>
-                                                <input type="radio" id="nao" name="ativo" value="nao" @if($anuncio->ativo=="nao") checked @endif required>
+                                                <input type="radio" id="nao" name="ativo" value="0" @if($anuncio->ativo=="nao") checked @endif required>
                                                 <label for="nao">Não</label>
                                             </div>
                                     </div>

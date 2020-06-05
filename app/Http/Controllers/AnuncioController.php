@@ -58,6 +58,7 @@ class AnuncioController extends Controller
     {
         $anuncio = Anuncio::find($id);
         if(isset($anuncio)){
+            Storage::disk('public')->delete($anuncio->foto);
             $anuncio->delete();
         }
         return back();

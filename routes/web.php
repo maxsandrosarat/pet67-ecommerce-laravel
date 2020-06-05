@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 Route::get('/', 'IndexController@index')->name('index');
+Route::get('/produtos', 'IndexController@produtos');
+Route::get('/animais', 'IndexController@animais');
 Route::get('/busca', 'IndexController@buscar');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/carrinho', 'CarrinhoController@index');
@@ -91,6 +93,13 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/', 'RelatorioController@index');
         Route::get('/estoque', 'RelatorioController@estoque');
         Route::get('/estoque/filtro', 'RelatorioController@estoque_filtro');
+    });
+
+    Route::group(['prefix' => 'animais'], function() {
+        Route::get('/', 'AnimalController@index');
+        Route::post('/', 'AnimalController@store');
+        Route::post('/editar/{id}', 'AnimalController@update');
+        Route::get('/apagar/{id}', 'AnimalController@destroy');
     });
 
 });

@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Admin' => $baseDir . '/app/Admin.php',
+    'App\\Animal' => $baseDir . '/app/Animal.php',
     'App\\Anuncio' => $baseDir . '/app/Anuncio.php',
     'App\\Categoria' => $baseDir . '/app/Categoria.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
@@ -27,6 +28,7 @@ return array(
     'App\\Http\\Controllers\\CategoriaController' => $baseDir . '/app/Http/Controllers/CategoriaController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\CupomDescontoController' => $baseDir . '/app/Http/Controllers/CupomDescontoController.php',
+    'App\\Http\\Controllers\\EnderecoController' => $baseDir . '/app/Http/Controllers/EnderecoController.php',
     'App\\Http\\Controllers\\EstoqueController' => $baseDir . '/app/Http/Controllers/EstoqueController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\IndexController' => $baseDir . '/app/Http/Controllers/IndexController.php',
@@ -51,6 +53,9 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\ServicoBanho' => $baseDir . '/app/ServicoBanho.php',
+    'App\\ServicoEstetica' => $baseDir . '/app/ServicoEstetica.php',
+    'App\\ServicoVeterinaria' => $baseDir . '/app/ServicoVeterinaria.php',
     'App\\TipoAnimal' => $baseDir . '/app/TipoAnimal.php',
     'App\\User' => $baseDir . '/app/User.php',
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
