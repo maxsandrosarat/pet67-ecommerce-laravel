@@ -32,7 +32,6 @@
                 </div>
             </div>
             @if(count($tipos)==0)
-                <br/><br/>
                 <div class="alert alert-danger" role="alert">
                     Sem tipos cadastrados!
                 </div>

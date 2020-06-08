@@ -17,6 +17,7 @@ class CreateServicoEsteticasTable extends Migration
             $table->id();
             $table->string('nome');
             $table->float('preco');
+            $table->string('descricao');
             $table->timestamps();
         });
     }

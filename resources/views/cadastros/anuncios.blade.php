@@ -45,7 +45,6 @@
                 </div>
             </div>
             @if(count($anuncios)==0)
-                <br/><br/>
                 <div class="alert alert-danger" role="alert">
                     Sem anuncios cadastradas!
                 </div>
@@ -83,7 +82,7 @@
                         </div>
                         <td>{{$anuncio->nome}}</td>
                         <td>{{$anuncio->link}}</td>
-                        <td>@if($anuncio->ativo=="sim") SIM @else NÃO @endif</td>
+                        <td>@if($anuncio->ativo=="1") SIM @else NÃO @endif</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal{{$anuncio->id}}" data-toggle="tooltip" data-placement="left" title="Editar">
                                 <i class="material-icons md-48">edit</i>
@@ -113,9 +112,9 @@
                                                 <input type="text" class="form-control" name="link" id="link" value="{{$anuncio->link}}" required>
                                                 <br>
                                                 <h5>Anúncio Ativo?</h5>
-                                                <input type="radio" id="sim" name="ativo" value="1" @if($anuncio->ativo=="sim") checked @endif required>
+                                                <input type="radio" id="sim" name="ativo" value="1" @if($anuncio->ativo=="1") checked @endif required>
                                                 <label for="sim">Sim</label>
-                                                <input type="radio" id="nao" name="ativo" value="0" @if($anuncio->ativo=="nao") checked @endif required>
+                                                <input type="radio" id="nao" name="ativo" value="0" @if($anuncio->ativo=="0") checked @endif required>
                                                 <label for="nao">Não</label>
                                             </div>
                                     </div>

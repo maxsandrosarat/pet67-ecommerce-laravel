@@ -7,7 +7,6 @@
             <a type="button" class="float-button" data-toggle="modal" data-target="#exampleModal" data-toggle="tooltip" data-placement="bottom" title="Adicionar Nova Marca">
                 <i class="material-icons blue md-60">add_circle</i>
             </a>
-            <br/><br/>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -33,7 +32,6 @@
                 </div>
             </div>
             @if(count($marcas)==0)
-                <br/><br/>
                 <div class="alert alert-danger" role="alert">
                     Sem marcas cadastradas!
                 </div>

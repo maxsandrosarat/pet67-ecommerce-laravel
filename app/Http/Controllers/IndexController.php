@@ -20,7 +20,7 @@ class IndexController extends Controller
         $tipos = TipoAnimal::orderBy('nome')->get();
         $marcas = Marca::orderBy('nome')->get();
         $cats = Categoria::orderBy('nome')->get();
-        $anuncios = Anuncio::where('ativo','sim')->get();
+        $anuncios = Anuncio::where('ativo',true)->get();
         return view('welcome',compact('tipo','pagina','prods','tipos','marcas','cats','anuncios'));
     }
 

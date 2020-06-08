@@ -30,7 +30,9 @@
                                         <br/><br/>
                                         <label for="nome">Nome do Animal</label>
                                         <input type="text" class="form-control" name="nome" id="nome" placeholder="Exemplo: Gato" required>
-                                        <label for="descricao">Descrição do Animal</label>
+                                        <br/>
+                                        <h5>Descrição do Animal</h5>
+                                        <br/>
                                         <textarea name="descricao" id="descricao" rows="10" cols="40" maxlength="500" placeholder="Resumo ou Curiosidade sobre o Animal"></textarea>
                                         <label for="preco">Preço do Animal</label>
                                         <input type="text" class="form-control" name="preco" id="preco" placeholder="Exemplo: 10.5" required>
@@ -134,7 +136,9 @@
                                                         <label for="nome">Nome do Animal</label>
                                                         <input type="text" class="form-control" name="nome" id="nome" value="{{$animal->nome}}" required>
                                                         <label for="nome">Nome do Animal</label>
-                                                        <label for="descricao">Descrição do Animal</label>
+                                                        <br/>
+                                                        <h5>Descrição do Animal</h5>
+                                                        <br/>
                                                         <textarea name="descricao" id="descricao" rows="10" cols="40" maxlength="500">{{$animal->descricao}}</textarea>
                                                         <label for="preco">Preço do Animal</label>
                                                         <input type="text" class="form-control" name="preco" id="preco" value="{{$animal->preco}}" required>

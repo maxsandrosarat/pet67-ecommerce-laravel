@@ -32,7 +32,6 @@
                 </div>
             </div>
             @if(count($cats)==0)
-                <br/><br/>
                 <div class="alert alert-danger" role="alert">
                     Sem categorias cadastradas!
                 </div>

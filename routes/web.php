@@ -102,6 +102,13 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/apagar/{id}', 'AnimalController@destroy');
     });
 
+    Route::group(['prefix' => 'servicosEstetica'], function() {
+        Route::get('/', 'ServicoEsteticaController@index');
+        Route::post('/', 'ServicoEsteticaController@store');
+        Route::post('/editar/{id}', 'ServicoEsteticaController@update');
+        Route::get('/apagar/{id}', 'ServicoEsteticaController@destroy');
+    });
+
 });
 
 Route::get('/produto/{id}', 'HomeController@produto')->name('produto');

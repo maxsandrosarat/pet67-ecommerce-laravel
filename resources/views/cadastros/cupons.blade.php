@@ -64,7 +64,6 @@
                 </div>
             </div>
             @if(count($cupons)==0)
-                <br/><br/>
                 <div class="alert alert-danger" role="alert">
                     Sem cupons cadastrados!
                 </div>

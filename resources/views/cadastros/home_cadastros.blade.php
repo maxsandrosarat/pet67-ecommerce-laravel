@@ -76,18 +76,18 @@
                 <div class="card-body">
                     <h5>Clientes</h5>
                     <p class="card-text">
-                        Cadastre seus clientes! 
+                        Gerencie seus clientes! 
                     </p>
-                    <a href="/admin/clientes" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/clientes" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
             <div class="card border border-primary">
                 <div class="card-body">
-                    <h5>Pets</h5>
+                    <h5>Serviços Estética</h5>
                     <p class="card-text">
-                        Cadastre os pets! 
+                        Gerencie seus Serviços de Estética! 
                     </p>
-                    <a href="/admin/pets" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/servicosEstetica" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
             <div class="card border border-primary">

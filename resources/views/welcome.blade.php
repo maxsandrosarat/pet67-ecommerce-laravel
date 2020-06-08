@@ -75,7 +75,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img src="/storage/{{$prod->foto}}" alt="foto_perfil" style="width: 100%">
+                    <img src="/storage/{{$prod->foto}}" alt="foto_produto" style="width: 100%">
                 </div>
                 </div>
             </div>
