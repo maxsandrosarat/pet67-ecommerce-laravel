@@ -62,6 +62,9 @@ class ProdutoController extends Controller
         if($request->input('promocao')!=""){
             $prod->promocao = $request->input('promocao');
         }
+        if($request->input('granel')!=""){
+            $prod->granel = $request->input('granel');
+        }
         $prod->save();
         return back();
     }
@@ -104,6 +107,9 @@ class ProdutoController extends Controller
             }
             if($request->input('promocao')!=""){
                 $prod->promocao = $request->input('promocao');
+            }
+            if($request->input('granel')!=""){
+                $prod->granel = $request->input('granel');
             }
             $prod->save();
         }

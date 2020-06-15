@@ -5,7 +5,7 @@
         <div class="card-body">
             <h5 class="card-title">Lista de Endereços</h5>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Cadastre suas Endereços
+                Cadastre seus Endereços
             </button>
             <br/><br/>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,7 +80,7 @@
                         <td>{{$endereco->uf}}</td>
                         <td>{{$endereco->tipo}}</td>
                         <td>
-                            <a href="/enderecos/apagar/{{$endereco->id}}" class="btn btn-sm btn-danger">Apagar</a>
+                            <a href="/enderecos/apagar/{{$endereco->id}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Excluir"><i class="material-icons md-48">delete</i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -91,5 +91,5 @@
 
     </div>
     <br>
-    <a href="/" class="btn btn-success">Voltar</a>
+    <a href="/carrinho" class="btn btn-success" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Voltar"><i class="material-icons white">reply</i></a>
 @endsection

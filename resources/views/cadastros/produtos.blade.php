@@ -77,6 +77,11 @@
                                         <label for="sim">Sim</label>
                                         <input type="radio" id="nao" name="ativo" value="nao" required>
                                         <label for="nao">Não</label>
+                                        <h5>Granel?</h5>
+                                        <input type="radio" id="sim" name="granel" value="1" required>
+                                        <label for="sim">Sim</label>
+                                        <input type="radio" id="nao" name="granel" value="0" required>
+                                        <label for="nao">Não</label>
                                         <h5>Promoção?</h5>
                                         <input type="radio" id="sim" name="promocao" value="1" required>
                                         <label for="sim">Sim</label>
@@ -138,15 +143,12 @@
                     <tr>
                         <th>Código</th>
                         <th>Foto</th>
-                        <th>Nome</th>
-                        <th>Tipo Animal</th>
-                        <th>Tipo Fase</th>
-                        <th>Marca</th>
-                        <th>Embalagem</th>
+                        <th>Produto</th>
                         <th>Preço</th>
                         <th>Estoque</th>
                         <th>Categoria</th>
                         <th>Ativo</th>
+                        <th>Granel</th>
                         <th>Promoção</th>
                         <th>Ações</th>
                     </tr>
@@ -155,7 +157,7 @@
                     @foreach ($prods as $prod)
                     <tr>
                         <td>{{$prod->id}}</td>
-                        <td width="120"><button type="button" data-toggle="modal" data-target="#exampleModalFoto{{$prod->id}}">@if($prod->foto!="")<img style="margin:0px; padding:0px;" src="/storage/{{$prod->foto}}" alt="foto_produto" width="50%">@endif</button></td>
+                        <td width="100"><button type="button" data-toggle="modal" data-target="#exampleModalFoto{{$prod->id}}">@if($prod->foto!="")<img style="margin:0px; padding:0px;" src="/storage/{{$prod->foto}}" alt="foto_produto" width="50%">@endif</button></td>
                         <!-- Modal -->
                         <div class="modal fade bd-example-modal-lg" id="exampleModalFoto{{$prod->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
@@ -171,15 +173,12 @@
                             </div>
                         </div>
                         </div>
-                        <td>{{$prod->nome}}</td>
-                        <td>{{$prod->tipo_animal->nome}}</td>
-                        <td>@if($prod->tipo_fase=='filhote') Filhote @else @if($prod->tipo_fase=='adulto') Adulto @else @if($prod->tipo_fase=='castrado') Castrado @else Todas @endif @endif @endif</td>
-                        <td>{{$prod->marca->nome}}</td>
-                        <td>{{$prod->embalagem}}</td>
-                        <td>{{ 'R$ '.number_format($prod->preco, 2, ',', '.')}}</td>
+                        <td>{{$prod->nome}} {{$prod->tipo_animal->nome}} @if($prod->tipo_fase=='filhote') Filhote @else @if($prod->tipo_fase=='adulto') Adulto @else @if($prod->tipo_fase=='castrado') Castrado @else Todas @endif @endif @endif {{$prod->marca->nome}} {{$prod->embalagem}}</td>
+                        <td width="78-">{{ 'R$ '.number_format($prod->preco, 2, ',', '.')}}</td>
                         <td>{{$prod->estoque}}</td>
                         <td>{{$prod->categoria->nome}}</td>
                         <td>@if($prod->ativo=='1') Sim @else Não @endif</td>
+                        <td>@if($prod->granel=='1') Sim @else Não @endif</td>
                         <td>@if($prod->promocao=='1') Sim @else Não @endif</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal{{$prod->id}}" data-toggle="tooltip" data-placement="left" title="Editar">
@@ -210,26 +209,51 @@
                                                         <br/>
                                                         <label for="tipo">Tipo de Animal</label>
                                                         <select id="tipo" name="tipo" required>
-                                                            <option value="{{$prod->tipo_animal->id}}">Selecione o tipo do animal</option>
+                                                            <option value="{{$prod->tipo_animal->id}}">{{$prod->tipo_animal->nome}}</option>
                                                             @foreach ($tipos as $tipo)
+                                                                @if($tipo->id==$prod->tipo_animal->id)
+                                                                @else
                                                                 <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                         <br/><br/>
                                                         <label for="fase">Fase do Animal:</label>
                                                         <select id="fase" name="fase">
-                                                            <option value="{{$prod->tipo_fase}}">Selecione a fase do animal</option>
-                                                            <option value="filhote">Filhote</option>
+                                                            <option value="{{$prod->tipo_fase}}">@if($prod->tipo_fase=="filhote") Filhote @else @if($prod->tipo_fase=="adulto") Adulto @else @if($prod->tipo_fase=="castrado") Castrado @else @if($prod->tipo_fase=="todas") Todas @endif @endif @endif @endif</option>
+                                                            @if($prod->tipo_fase=="filhote")
                                                             <option value="adulto">Adulto</option>
                                                             <option value="castrado">Castrado</option>
                                                             <option value="todas">Todas</option>
+                                                            @else
+                                                                @if($prod->tipo_fase=="adulto")
+                                                                <option value="filhote">Filhote</option>
+                                                                <option value="castrado">Castrado</option>
+                                                                <option value="todas">Todas</option>
+                                                                @else
+                                                                    @if($prod->tipo_fase=="castrado")
+                                                                    <option value="filhote">Filhote</option>
+                                                                    <option value="adulto">Adulto</option>
+                                                                    <option value="todas">Todas</option>
+                                                                    @else
+                                                                        @if($prod->tipo_fase=="todas")
+                                                                        <option value="filhote">Filhote</option>
+                                                                        <option value="adulto">Adulto</option>
+                                                                        <option value="castrado">Castrado</option>
+                                                                        @endif
+                                                                    @endif
+                                                                @endif
+                                                            @endif
                                                         </select>
                                                         <br/><br/>
                                                         <label for="marca">Marca</label>
                                                         <select id="marca" name="marca" required>
-                                                            <option value="{{$prod->marca->id}}">Selecione a categoria do produto</option>
+                                                            <option value="{{$prod->marca->id}}">{{$prod->marca->nome}}</option>
                                                             @foreach ($marcas as $marca)
+                                                                @if($marca->id==$prod->marca->id)
+                                                                @else
                                                                 <option value="{{$marca->id}}">{{$marca->nome}}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                         <br/><br/>
@@ -244,15 +268,23 @@
                                                         <br><br/>
                                                         <label for="categoria">Categoria</label>
                                                         <select id="categoria" name="categoria" required>
-                                                            <option value="{{$prod->categoria->id}}">Selecione</option>
+                                                            <option value="{{$prod->categoria->id}}">{{$prod->categoria->nome}}</option>
                                                             @foreach ($cats as $cat)
+                                                                @if($cat->id==$prod->categoria->id)
+                                                                @else
                                                                 <option value="{{$cat->id}}">{{$cat->nome}}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                         <h5>Ativo?</h5>
                                                         <input type="radio" id="sim" name="ativo" value="1" @if($prod->ativo=="1") checked @endif required>
                                                         <label for="sim">Sim</label>
                                                         <input type="radio" id="nao" name="ativo" value="0" @if($prod->ativo=="0") checked @endif required>
+                                                        <label for="nao">Não</label>
+                                                        <h5>Granel?</h5>
+                                                        <input type="radio" id="sim" name="granel" value="1" @if($prod->granel=="1") checked @endif required>
+                                                        <label for="sim">Sim</label>
+                                                        <input type="radio" id="nao" name="granel" value="0" @if($prod->granel=="0") checked @endif required>
                                                         <label for="nao">Não</label>
                                                         <h5>Promoção?</h5>
                                                         <input type="radio" id="sim" name="promocao" value="1" @if($prod->promocao=="1") checked @endif required>

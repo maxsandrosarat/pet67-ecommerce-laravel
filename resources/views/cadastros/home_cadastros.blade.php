@@ -92,11 +92,34 @@
             </div>
             <div class="card border border-primary">
                 <div class="card-body">
+                    <h5>Serviços Veterinária</h5>
+                    <p class="card-text">
+                        Gerencie seus Serviços de Veterinária! 
+                    </p>
+                    <a href="/admin/servicosVeterinaria" class="btn btn-primary">Gerenciar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row">
+        <div class="card-deck">
+            <div class="card border border-primary">
+                <div class="card-body">
+                    <h5>Imagens</h5>
+                    <p class="card-text">
+                        Gerencie suas Imagens! 
+                    </p>
+                    <a href="/admin/images" class="btn btn-primary">Gerenciar</a>
+                </div>
+            </div>
+            <div class="card border border-primary">
+                <div class="card-body">
                     <h5>Vacinas</h5>
                     <p class="card-text">
                         Cadastre suas vacinas! 
                     </p>
-                    <a href="/admin/vacinas" class="btn btn-primary">Cadastrar</a>
+                    <a href="/admin/vacinas" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
         </div>

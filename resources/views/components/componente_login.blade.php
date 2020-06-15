@@ -15,7 +15,7 @@
                         </div>
 
                         <div class="links">
-                          <a href="{{ route('carrinho.compras') }}">Minhas compras</a>
+                          <a href="/compras">Minhas compras</a>
                         </div>
 
                         <div class="links">

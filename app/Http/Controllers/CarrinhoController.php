@@ -66,6 +66,66 @@ class CarrinhoController extends Controller
 
     }
 
+    public function adicionarGranel(Request $request)
+    {
+
+        $this->middleware('VerifyCsrfToken');
+        $idproduto = $request->input('id');
+        $qtd = $request->input('qtd');
+        $preco = $request->input('preco');
+        $produto = Produto::find($idproduto);
+        if( empty($produto->id) ) {
+            $request->session()->flash('mensagem-falha', 'Produto não encontrado em nossa loja!');
+            return redirect()->route('carrinho.index');
+        }
+
+        $idUser = Auth::user()->id;
+
+        $idpedido = Pedido::consultaId([
+            'user_id' => $idUser,
+            'status'  => 'RESERV' // Reservada
+            ]);
+
+        if( empty($idpedido) ) {
+            $pedido = new Pedido();
+            $pedido->user_id = $idUser;
+            $pedido->status = 'RESERV';
+            $pedido->save();
+
+            $idpedido = $pedido->id;
+
+        }
+
+        $where_produto = [
+            'pedido_id'  => $idpedido,
+            'produto_id' => $idproduto
+        ];
+
+        $produto = PedidoProduto::where($where_produto)->orderBy('id', 'desc')->first();
+        if( empty($produto->id) ) {
+            $request->session()->flash('mensagem-falha', 'Produto não encontrado no carrinho!');
+            return redirect()->route('carrinho.index');
+        }
+
+        $where_produto['id'] = $produto->id;
+
+        PedidoProduto::where($where_produto)->delete();
+
+        $pedidoProduto = new PedidoProduto();
+        $pedidoProduto->pedido_id = $idpedido;
+        $pedidoProduto->produto_id = $idproduto;
+        $pedidoProduto->qtdGranel = $qtd;
+        $pedidoProduto->valor = $preco;
+        $pedidoProduto->status = 'RESERV';
+        $pedidoProduto->save();
+        
+
+        $request->session()->flash('mensagem-sucesso', 'Produto adicionado ao carrinho com sucesso!');
+
+        return redirect()->route('carrinho.index');
+
+    }
+
     public function remover(Request $request)
     {
 
@@ -173,13 +233,17 @@ class CarrinhoController extends Controller
             'user_id' => Auth::user()->id
             ])->orderBy('created_at', 'desc')->get();
 
+        return view('cliente.compras', compact('compras'));
+
+    }
+
+    public function canceladas()
+    {
         $cancelados = Pedido::where([
             'status'  => 'CANCEL',
             'user_id' => Auth::user()->id
             ])->orderBy('updated_at', 'desc')->get();
-        $enderecos = Endereco::all();
-        return view('cliente.compras', compact('compras', 'cancelados','enderecos'));
-
+        return view('cliente.compras_canceladas', compact('cancelados'));
     }
 
     public function cancelar(Request $request)

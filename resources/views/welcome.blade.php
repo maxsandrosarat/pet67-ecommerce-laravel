@@ -99,7 +99,8 @@
       @endif
       </div>
     <div id="anuncios" class="col">
-        <p>Parceiros</p>
+      <br/>
+        <p style="font-weight: bold;">Parceiros</p>
         @foreach ($anuncios as $anuncio)
           <a href="{{$anuncio->link}}" target="_blank"><img class="card-img-top" style="margin:0px; padding:0px;" src="/storage/{{$anuncio->foto}}" alt="{{$anuncio->nome}}"></a>
           <br/><br/>

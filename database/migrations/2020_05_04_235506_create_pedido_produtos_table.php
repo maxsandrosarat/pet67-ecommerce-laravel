@@ -18,6 +18,7 @@ class CreatePedidoProdutosTable extends Migration
             $table->unsignedBigInteger('pedido_id');
             $table->unsignedBigInteger('produto_id');
             $table->enum('status',['RESERV','FEITO','PAGO','CANCEL']);
+            $table->float('qtdGranel')->default(0);
             $table->decimal('valor',6,2)->default(0);
             $table->decimal('desconto',6,2)->default(0);
             $table->unsignedBigInteger('cupom_desconto_id')->nullable();

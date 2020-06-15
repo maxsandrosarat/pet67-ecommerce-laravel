@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Produto;
 use App\Categoria;
 use App\Marca;
+use App\ServicoEstetica;
+use App\ServicoVeterinaria;
 use App\TipoAnimal;
 
 class IndexController extends Controller
@@ -157,5 +159,17 @@ class IndexController extends Controller
     {
         $animais = Animal::where('ativo',true)->get();
         return view('animais',compact('animais'));
+    }
+
+    public function servicosEstetica()
+    {
+        $servs = ServicoEstetica::all();
+        return view('servicos_estetica',compact('servs'));
+    }
+
+    public function servicosVeterinaria()
+    {
+        $servs = ServicoVeterinaria::all();
+        return view('servicos_veterinaria',compact('servs'));
     }
 }

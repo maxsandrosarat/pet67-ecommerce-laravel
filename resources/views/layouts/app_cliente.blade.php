@@ -1,16 +1,23 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <title>Pet67</title>
+    @php
+        use App\Image;
+        $images = Image::where('nome','favicon')->get();
+    @endphp
+    @foreach ($images as $image)
+    <link rel="shortcut icon" href="/storage/{{$image->foto}}"/>
+    @endforeach
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/storage/logo/favicon.png"/>
     
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Pet67</title>
+    
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -56,6 +63,34 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript">
+
+        function id(campo){
+            return document.getElementById(campo);
+        }
+
+        
+        function getValor(campo){
+            var valor = document.getElementById(campo).value.replace(',','.');
+            return parseFloat(valor);
+        }
+
+
+        function granel( idproduto ){
+            var qtd = getValor('qtd');
+            var total = qtd * getValor('preco');
+            var valor = total;
+	        var valorFormatado = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            id('total').value = valorFormatado;
+            
+
+            $('#form-adicionar-produto-granel input[name="id"]').val(idproduto);
+            $('#form-adicionar-produto-granel  input[name="qtd"]').val(qtd);
+            $('#form-adicionar-produto-granel  input[name="preco"]').val(total);
+            $('#form-adicionar-produto-granel').submit();
+        }
+
+
+
         function carrinhoRemoverProduto( idpedido, idproduto, item ) {
             $('#form-remover-produto input[name="pedido_id"]').val(idpedido);
             $('#form-remover-produto input[name="produto_id"]').val(idproduto);

@@ -16,9 +16,14 @@ Auth::routes();
 Route::get('/', 'IndexController@index')->name('index');
 Route::get('/produtos', 'IndexController@produtos');
 Route::get('/animais', 'IndexController@animais');
+Route::get('/servicosEstetica', 'IndexController@servicosEstetica');
+Route::get('/servicosVeterinaria', 'IndexController@servicosVeterinaria');
 Route::get('/busca', 'IndexController@buscar');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/carrinho', 'CarrinhoController@index');
+Route::get('/compras', function() {
+    return view("cliente.home_compras");
+})->middleware("auth");
 Route::get('/enderecos', 'EnderecoController@index');
 Route::post('/enderecos', 'EnderecoController@store');
 Route::get('/enderecos/apagar/{id}', 'EnderecoController@destroy');
@@ -28,6 +33,13 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/login', 'Auth\AdminLoginController@index')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/cadastros', 'AdminController@cadastros');
+
+    Route::group(['prefix' => 'images'], function() {
+        Route::get('/', 'ImageController@index');
+        Route::post('/', 'ImageController@store');
+        Route::post('/editar/{id}', 'ImageController@update');
+        Route::get('/apagar/{id}', 'ImageController@destroy');
+    });
 
     Route::group(['prefix' => 'pedidos'], function() {
         Route::get('/', 'AdminController@pedidos');
@@ -109,6 +121,13 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/apagar/{id}', 'ServicoEsteticaController@destroy');
     });
 
+    Route::group(['prefix' => 'servicosVeterinaria'], function() {
+        Route::get('/', 'ServicoVeterinariaController@index');
+        Route::post('/', 'ServicoVeterinariaController@store');
+        Route::post('/editar/{id}', 'ServicoVeterinariaController@update');
+        Route::get('/apagar/{id}', 'ServicoVeterinariaController@destroy');
+    });
+
 });
 
 Route::get('/produto/{id}', 'HomeController@produto')->name('produto');
@@ -117,9 +136,11 @@ Route::get('/carrinho/adicionar', function() {
     return redirect()->route('index');
 });
 Route::post('/carrinho/adicionar', 'CarrinhoController@adicionar')->name('carrinho.adicionar');
+Route::post('/carrinho/adicionarGranel', 'CarrinhoController@adicionarGranel')->name('carrinho.adicionarGranel');
 Route::delete('/carrinho/remover', 'CarrinhoController@remover')->name('carrinho.remover');
 Route::post('/carrinho/concluir', 'CarrinhoController@concluir')->name('carrinho.concluir');
 Route::get('/carrinho/compras', 'CarrinhoController@compras')->name('carrinho.compras');
+Route::get('/carrinho/canceladas', 'CarrinhoController@canceladas')->name('carrinho.canceladas');
 Route::post('/carrinho/cancelar', 'CarrinhoController@cancelar')->name('carrinho.cancelar');
 Route::post('/carrinho/desconto', 'CarrinhoController@desconto')->name('carrinho.desconto');
 

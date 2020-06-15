@@ -2,7 +2,13 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <title>Pet67</title>
-        <link rel="shortcut icon" href="/storage/logo/favicon.png"/>
+        @php
+            use App\Image;
+            $images = Image::where('nome','favicon')->get();
+        @endphp
+        @foreach ($images as $image)
+        <link rel="shortcut icon" href="/storage/{{$image->foto}}"/>
+        @endforeach
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Fonts -->

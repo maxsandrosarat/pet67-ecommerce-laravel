@@ -56,7 +56,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <a href="https://goo.gl/maps/w4xaUQwcgm9pUbAo8"><iframe style="width: 100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3736.249946422303!2d-54.644058085619484!3d-20.53695176277126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9486e595b0f60b43%3A0x2e91bed800abbd94!2sPet67!5e0!3m2!1spt-BR!2sbr!4v1589060520779!5m2!1spt-BR!2sbr" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></a>
+            <iframe style="width: 100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3736.249946422303!2d-54.644058085619484!3d-20.53695176277126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9486e595b0f60b43%3A0x2e91bed800abbd94!2sPet67!5e0!3m2!1spt-BR!2sbr!4v1589060520779!5m2!1spt-BR!2sbr" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe><a class="btn btn-primary" href="https://goo.gl/maps/w4xaUQwcgm9pUbAo8">Ir para o Maps</a>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
