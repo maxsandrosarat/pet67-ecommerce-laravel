@@ -85,8 +85,23 @@
 
             $('#form-adicionar-produto-granel input[name="id"]').val(idproduto);
             $('#form-adicionar-produto-granel  input[name="qtd"]').val(qtd);
-            $('#form-adicionar-produto-granel  input[name="preco"]').val(total);
+            $('#form-adicionar-produto-granel  input[name="total"]').val(total);
             $('#form-adicionar-produto-granel').submit();
+        }
+
+        function formataNumeroTelefone() {
+            var numero = document.getElementById('numero').value;
+            var length = numero.length;
+            var telefoneFormatado;
+            
+            if (length == 10) {
+            telefoneFormatado = '(' + numero.substring(0, 2) + ') ' + numero.substring(2, 6) + '-' + numero.substring(6, 10);
+            } else if (length == 11) {
+            telefoneFormatado = '(' + numero.substring(0, 2) + ') ' + numero.substring(2, 7) + '-' + numero.substring(7, 11);
+            } else {
+                telefoneFormatado = 'Número Inválido, digite número com DDD';
+            }
+            id('numero').value = telefoneFormatado;
         }
 
 

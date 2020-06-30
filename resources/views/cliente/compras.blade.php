@@ -25,6 +25,7 @@
                     <h5 scope="col"> Nº do Pedido: {{ $pedido->id }}  - Status: {{$pedido->status}}</h5>
                     <h5 scope="col"> Criado em: {{ $pedido->created_at->format('d/m/Y H:i') }} </h5>
                 </div>
+                <div class="table-responsive-xl">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -103,15 +104,9 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @php
-                                                        $total_pedido = 0;
-                                                    @endphp
                                                     @foreach ($pedido->pedido_produtos_itens as $pedido_produto)
                                                         @php
                                                             $total_produto = $pedido_produto->valor - $pedido_produto->desconto;
-                                                            if($pedido_produto->status == 'FEITO'){
-                                                                $total_pedido += $total_produto;
-                                                            }''
                                                         @endphp
                                                         <tr>
                                                             <td>
@@ -149,14 +144,20 @@
                                 </td>
                                 <td colspan="2"></td>
                                 <td width="200"><strong>Total do Pedido:</strong></td>
-                                <td width="100">R$ {{ number_format($total_pedido, 2, ',', '.') }}</td>
+                                <td width="100">R$ {{ number_format($pedido->total, 2, ',', '.') }}</td>
                             </tr>
                             <tr>
                                 <td colspan="1">Entrega:</td>
-                                <td colspan="5"><b>{{$pedido->endereco->rua}}, {{$pedido->endereco->numero}}@if($pedido->endereco->complemento!="") ({{$pedido->endereco->complemento}}) @else @endif- {{$pedido->endereco->bairro}} - {{$pedido->endereco->cidade}} - {{$pedido->endereco->uf}}</b></td>
+                                <td colspan="5"><b>{{$pedido->endereco->rua}}, {{$pedido->endereco->numero}}@if($pedido->endereco->complemento!="") ({{$pedido->endereco->complemento}}) @else @endif- {{$pedido->endereco->bairro}} - {{$pedido->endereco->cidade}} - {{$pedido->endereco->uf}}</b>
+                                    @if($pedido->observacao!="")
+                                    <br/>
+                                    Observação: {{$pedido->observacao}}
+                                    @endif
+                                </td>
                             </tr>
                         </tfoot>
                     </table>
+                    </div>
             @empty
                 <h5 class="center">
                     Você ainda não fez nenhuma compra válida.
@@ -166,5 +167,7 @@
         <hr/>
     </div>
 </div>
-
+<h5>Ajude-nos a manter contato, cadastre seus telefones 
+    <a type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Cadastrar Novo Telefone" href="/telefones">Cadastrar Telefone</a>
+</h5>
 @endsection

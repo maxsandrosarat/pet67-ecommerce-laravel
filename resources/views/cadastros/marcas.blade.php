@@ -36,6 +36,7 @@
                     Sem marcas cadastradas!
                 </div>
             @else
+            <div class="table-responsive-xl">
             <table class="table table-striped table-ordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -84,6 +85,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             @endif
         </div>
 

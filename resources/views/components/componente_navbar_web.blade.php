@@ -8,7 +8,7 @@
     $images = Image::where('nome','logo')->get();
   @endphp
   @foreach ($images as $image)
-  <img src="/storage/{{$image->foto}}" alt="logo_pet67" width="100" class="d-inline-block align-top" alt="" loading="lazy">
+  <img src="/storage/{{$image->foto}}" alt="logo_pet67" width="50" class="d-inline-block align-top" alt="" loading="lazy">
   @endforeach
   </a>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">

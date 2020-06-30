@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClienteEndereco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Pedido;
@@ -19,10 +20,12 @@ class CarrinhoController extends Controller
 
     public function index()
     {
-        $id = Auth::user()->id;
-        $pedidos = Pedido::where('status','RESERV')->where('user_id',"$id")->get();
-        $enderecos = Endereco::where('user_id',"$id")->get();
-        return view('cliente.carrinho', compact('pedidos','enderecos'));
+        $userId = Auth::user()->id;
+        $pedidos = Pedido::where('status','RESERV')->where('user_id',"$userId")->get();
+        $clienteEnderecos = ClienteEndereco::where([
+            'user_id'  => "$userId"
+            ])->get();
+        return view('cliente.carrinho', compact('pedidos','clienteEnderecos'));
     }
 
     public function adicionar(Request $request)
@@ -46,12 +49,19 @@ class CarrinhoController extends Controller
         if( empty($idpedido) ) {
             $pedido = new Pedido();
             $pedido->user_id = $idUser;
+            $pedido->total += $produto->preco;
             $pedido->status = 'RESERV';
             $pedido->save();
 
             $idpedido = $pedido->id;
 
+        } else {
+            $pedido = Pedido::find($idpedido);
+            $pedido->total += $produto->preco;
+            $pedido->save();
         }
+        
+
 
         $pedidoProduto = new PedidoProduto();
         $pedidoProduto->pedido_id = $idpedido;
@@ -59,6 +69,8 @@ class CarrinhoController extends Controller
         $pedidoProduto->valor = $produto->preco;
         $pedidoProduto->status = 'RESERV';
         $pedidoProduto->save();
+
+        
 
         $request->session()->flash('mensagem-sucesso', 'Produto adicionado ao carrinho com sucesso!');
 
@@ -72,12 +84,14 @@ class CarrinhoController extends Controller
         $this->middleware('VerifyCsrfToken');
         $idproduto = $request->input('id');
         $qtd = $request->input('qtd');
-        $preco = $request->input('preco');
+        $preco = $request->input('total');
         $produto = Produto::find($idproduto);
         if( empty($produto->id) ) {
             $request->session()->flash('mensagem-falha', 'Produto não encontrado em nossa loja!');
             return redirect()->route('carrinho.index');
         }
+
+        $precoProduto = $produto->preco;
 
         $idUser = Auth::user()->id;
 
@@ -89,12 +103,13 @@ class CarrinhoController extends Controller
         if( empty($idpedido) ) {
             $pedido = new Pedido();
             $pedido->user_id = $idUser;
+            $pedido->total += $qtd * $precoProduto;
             $pedido->status = 'RESERV';
             $pedido->save();
 
             $idpedido = $pedido->id;
 
-        }
+        } 
 
         $where_produto = [
             'pedido_id'  => $idpedido,
@@ -105,6 +120,12 @@ class CarrinhoController extends Controller
         if( empty($produto->id) ) {
             $request->session()->flash('mensagem-falha', 'Produto não encontrado no carrinho!');
             return redirect()->route('carrinho.index');
+        }   else {
+            
+            $pedido = Pedido::find($idpedido);
+            $pedido->total -= $produto->valor;
+            $pedido->total += $qtd * $precoProduto;
+            $pedido->save();
         }
 
         $where_produto['id'] = $produto->id;
@@ -171,6 +192,16 @@ class CarrinhoController extends Controller
             Pedido::where([
                 'id' => $produto->pedido_id
                 ])->delete();
+        } else {
+            $pedido = Pedido::find($idpedido);
+            $prod = Produto::find($idproduto);
+            if($prod->granel==true){
+                $pedido->total -= $produto->valor;
+                $pedido->save();
+            } else {
+                $pedido->total -= $prod->preco;
+                $pedido->save();
+            }
         }
 
         $request->session()->flash('mensagem-sucesso', 'Produto removido do carrinho com sucesso!');
@@ -184,10 +215,12 @@ class CarrinhoController extends Controller
 
         $idpedido  = $request->input('pedido_id');
         $idendereco  = $request->input('endereco');
+        $observacao  = $request->input('observacao');
         $idusuario = Auth::user()->id;
 
         $pedido = Pedido::find($idpedido);
         $pedido->endereco_id = $idendereco;
+        $pedido->observacao = $observacao;
         $pedido->update();
 
         $check_pedido = Pedido::where([
@@ -280,11 +313,32 @@ class CarrinhoController extends Controller
             return redirect()->route('carrinho.compras');
         }
 
+        $produtos = PedidoProduto::where([
+            'pedido_id' => $idpedido,
+            'status'    => 'FEITO'
+        ])->whereIn('id', $idspedido_prod)->get();
+
+        foreach ($produtos as $prods) {
+            $prod = Produto::find($prods->produto_id);
+            $pedido = Pedido::find($prods->pedido_id);
+            if($prod->granel==true){
+                $pedido->total -= $prods->valor;
+                $pedido->save();
+            } else {
+                $pedido->total -= ($prods->valor - $prods->desconto);
+                $pedido->save();
+            }
+        }
+        
+
         PedidoProduto::where([
                 'pedido_id' => $idpedido,
                 'status'    => 'FEITO'
             ])->whereIn('id', $idspedido_prod)->update([
-                'status' => 'CANCEL'
+                'status' => 'CANCEL',
+                'qtdGranel' => 0,
+                'valor' => 0,
+                'desconto' => 0
             ]);
 
         $check_pedido_cancel = PedidoProduto::where([
@@ -355,47 +409,58 @@ class CarrinhoController extends Controller
 
         $aplicou_desconto = false;
         foreach ($pedido_produtos as $pedido_produto) {
+            $prod = Produto::find($pedido_produto->produto_id);
+            if($prod->granel==false){
 
-            switch ($cupom->modo_desconto) {
-                case 'porc':
-                    $valor_desconto = ( $pedido_produto->valor * $cupom->desconto ) / 100;
-                    break;
+                switch ($cupom->modo_desconto) {
+                    case 'porc':
+                        $valor_desconto = ( $pedido_produto->valor * $cupom->desconto ) / 100;
+                        break;
 
-                default:
-                    $valor_desconto = $cupom->desconto;
-                    break;
+                    default:
+                        $valor_desconto = $cupom->desconto;
+                        break;
+                }
+
+                $valor_desconto = ($valor_desconto > $pedido_produto->valor) ? $pedido_produto->valor : number_format($valor_desconto, 2);
+
+                switch ($cupom->modo_limite) {
+                    case 'qtd':
+                        $qtd_pedido = PedidoProduto::whereIn('status', ['FEITO', 'RESERV'])->where([
+                                'cupom_desconto_id' => $cupom->id
+                            ])->count();
+
+                        if( $qtd_pedido >= $cupom->limite ) {
+                            
+                        }
+                        break;
+
+                    default:
+                        $valor_ckc_descontos = PedidoProduto::whereIn('status', ['FEITO', 'RESERV'])->where([
+                                'cupom_desconto_id' => $cupom->id
+                            ])->sum('desconto');
+
+                        if( ($valor_ckc_descontos+$valor_desconto) > $cupom->limite ) {
+                            
+                        }
+                        break;
+                }
+
+                if(isset($pedido_produto->cupom_desconto_id)){
+
+                } else {
+                    $pedido = Pedido::find($idpedido);
+                    $pedido->total -= $valor_desconto;
+                    $pedido->save();
+                }
+
+                $pedido_produto->cupom_desconto_id = $cupom->id;
+                $pedido_produto->desconto          = $valor_desconto;
+                $pedido_produto->update();
+
+
+                $aplicou_desconto = true;
             }
-
-            $valor_desconto = ($valor_desconto > $pedido_produto->valor) ? $pedido_produto->valor : number_format($valor_desconto, 2);
-
-            switch ($cupom->modo_limite) {
-                case 'qtd':
-                    $qtd_pedido = PedidoProduto::whereIn('status', ['FEITO', 'RESERV'])->where([
-                            'cupom_desconto_id' => $cupom->id
-                        ])->count();
-
-                    if( $qtd_pedido >= $cupom->limite ) {
-                        
-                    }
-                    break;
-
-                default:
-                    $valor_ckc_descontos = PedidoProduto::whereIn('status', ['FEITO', 'RESERV'])->where([
-                            'cupom_desconto_id' => $cupom->id
-                        ])->sum('desconto');
-
-                    if( ($valor_ckc_descontos+$valor_desconto) > $cupom->limite ) {
-                        
-                    }
-                    break;
-            }
-
-            $pedido_produto->cupom_desconto_id = $cupom->id;
-            $pedido_produto->desconto          = $valor_desconto;
-            $pedido_produto->update();
-
-            $aplicou_desconto = true;
-
         }
 
         if( $aplicou_desconto ) {

@@ -10,7 +10,7 @@
                     <p class="card-text">
                         Veja suas entradas e saídas!
                     </p>
-                    <a href="/relatorios/estoque" class="btn btn-primary">Verificar</a>
+                    <a href="/admin/relatorios/estoque" class="btn btn-primary">Verificar</a>
                 </div>
             </div>
         </div>

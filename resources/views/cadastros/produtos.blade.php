@@ -138,6 +138,7 @@
                 </div>
                 <br/>
             <h5>Exibindo {{$prods->count()}} de {{$prods->total()}} de Produtos ({{$prods->firstItem()}} a {{$prods->lastItem()}})</h5>
+            <div class="table-responsive-xl">
             <table class="table table-striped table-ordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -308,6 +309,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             @endif
         </div>
         <div class="card-footer">

@@ -10,4 +10,5 @@ class Endereco extends Model
     {
         return $this->belongsTo('App\Pedido', 'pedido_id', 'id');
     }
+
 }

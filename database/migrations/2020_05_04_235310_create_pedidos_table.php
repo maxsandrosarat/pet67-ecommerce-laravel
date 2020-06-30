@@ -20,6 +20,8 @@ class CreatePedidosTable extends Migration
             $table->unsignedBigInteger('endereco_id')->nullable();
             $table->foreign('endereco_id')->references('id')->on('enderecos');
             $table->enum('status',['RESERV','FEITO','PAGO','CANCEL']);
+            $table->float('total');
+            $table->string('observacao')->nullable();
             $table->timestamps();
         });
     }

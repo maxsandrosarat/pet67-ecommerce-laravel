@@ -45,6 +45,7 @@
                 </div>
                 <br/>
             <h5>Exibindo {{$prods->count()}} de {{$prods->total()}} de Produtos ({{$prods->firstItem()}} a {{$prods->lastItem()}})</h5>
+            <div class="table-responsive-xl">
             <table class="table table-striped table-ordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -163,6 +164,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             @endif
         </div>
         <div class="card-footer">
@@ -170,5 +172,5 @@
         </div>
     </div>
     <br>
-    <a href="/cadastros" class="btn btn-success">Voltar</a>
+    <a href="/admin/estoque" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Voltar"><i class="material-icons white">reply</i></a>
 @endsection

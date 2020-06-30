@@ -43,13 +43,13 @@
 
 		.links > a {
 			color: #636b6f;
-			padding: 5px 20px;
+			padding: 5px 15px;
 			font-size: 20px;
 			font-weight: 600;
 			letter-spacing: .1rem;
 			text-decoration: none;
 			text-transform: uppercase;
-			float: right;
+			float: left;
 		}
 
 		.links > a:hover {
@@ -57,12 +57,28 @@
   			color: #0000CD;
 		}
 
+		.links2 > a {
+			color: #636b6f;
+			padding: 5px 30px;
+			font-size: 15px;
+			font-weight: 600;
+			letter-spacing: .1rem;
+			text-decoration: none;
+			text-transform: uppercase;
+			float: left;
+		}
+
+		.links2 > a:hover {
+			border: 2px solid #FFFF00;
+  			color: #0000CD;
+		}
+
 		.icons > a {
 			color: #636b6f;
-			padding: 5px 20px;
+			padding: 5px 35px;
 			font-size: 20px;
 			text-decoration: none;
-			float: left;
+			float: right;
 		}
 
 		.icons > a:hover {

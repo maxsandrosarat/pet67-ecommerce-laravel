@@ -4,7 +4,7 @@
 <div class="jumbotron bg-light border border-secondary">
     <div class="row">
         <div class="card-deck">
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Produtos</h5>
                     <p class="card-text">
@@ -13,7 +13,7 @@
                     <a href="/admin/produtos" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Categorias</h5>
                     <p class="card-text">
@@ -22,7 +22,7 @@
                     <a href="/admin/categorias" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Marcas</h5>
                     <p class="card-text">
@@ -31,7 +31,7 @@
                     <a href="/admin/marcas" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Tipos de Animais</h5>
                     <p class="card-text">
@@ -40,7 +40,7 @@
                     <a href="/admin/tiposAnimais" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Cupons de Desconto</h5>
                     <p class="card-text">
@@ -54,7 +54,7 @@
     <br/><br/>
     <div class="row">
         <div class="card-deck">
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Anúncios</h5>
                     <p class="card-text">
@@ -63,7 +63,7 @@
                     <a href="/admin/anuncios" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Animais</h5>
                     <p class="card-text">
@@ -72,7 +72,7 @@
                     <a href="/admin/animais" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Clientes</h5>
                     <p class="card-text">
@@ -81,7 +81,7 @@
                     <a href="/admin/clientes" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Serviços Estética</h5>
                     <p class="card-text">
@@ -90,7 +90,7 @@
                     <a href="/admin/servicosEstetica" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Serviços Veterinária</h5>
                     <p class="card-text">
@@ -104,7 +104,7 @@
     <br/><br/>
     <div class="row">
         <div class="card-deck">
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Imagens</h5>
                     <p class="card-text">
@@ -113,7 +113,7 @@
                     <a href="/admin/images" class="btn btn-primary">Gerenciar</a>
                 </div>
             </div>
-            <div class="card border border-primary">
+            <div class="card border border-primary mb-3" style="width: 16rem;">
                 <div class="card-body">
                     <h5>Vacinas</h5>
                     <p class="card-text">

@@ -27,6 +27,9 @@ Route::get('/compras', function() {
 Route::get('/enderecos', 'EnderecoController@index');
 Route::post('/enderecos', 'EnderecoController@store');
 Route::get('/enderecos/apagar/{id}', 'EnderecoController@destroy');
+Route::get('/telefones', 'TelefoneController@index');
+Route::post('/telefones', 'TelefoneController@store');
+Route::get('/telefones/apagar/{id}', 'TelefoneController@destroy');
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
@@ -126,6 +129,11 @@ Route::group(['prefix' => 'admin'], function() {
         Route::post('/', 'ServicoVeterinariaController@store');
         Route::post('/editar/{id}', 'ServicoVeterinariaController@update');
         Route::get('/apagar/{id}', 'ServicoVeterinariaController@destroy');
+    });
+
+    Route::group(['prefix' => 'clientes'], function() {
+        Route::get('/', 'ClienteController@index');
+        Route::get('/filtro', 'ClienteController@filtro');
     });
 
 });

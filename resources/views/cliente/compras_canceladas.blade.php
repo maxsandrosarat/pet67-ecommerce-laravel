@@ -24,6 +24,7 @@
                 <h5 scope="col"> Pedido: {{ $pedido->id }} </h5>
                 <h5 scope="col"> Criado em: {{ $pedido->created_at->format('d/m/Y H:i') }} </h5>
                 <h5 scope="col" style="color: red;"> Cancelado em: {{ $pedido->updated_at->format('d/m/Y H:i') }} </h5>
+                <div class="table-responsive-xl">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -69,6 +70,7 @@
                         </tr>
                     </tfoot>
                 </table>
+                </div>
             @empty
                 <h5 class="center">Você não cancelou nenhuma compra.</h5>
             @endforelse

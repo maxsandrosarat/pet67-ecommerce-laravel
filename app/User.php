@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function enderecos(){
+        return $this->belongsToMany("App\Endereco", "cliente_enderecos");
+    }
+
+    function telefones(){
+        return $this->belongsToMany("App\Telefone", "cliente_telefones");
+    }
 }

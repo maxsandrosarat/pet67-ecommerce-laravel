@@ -27,6 +27,9 @@
             <li @if($current=="enderecos") class="nav-item active" @else class="nav-item" @endif>
                 <a class="nav-link" href="/enderecos">Meus Endereços</a>
             </li>
+            <li @if($current=="telefones") class="nav-item active" @else class="nav-item" @endif>
+                <a class="nav-link" href="/telefones">Meus Telefones</a>
+            </li>
             @endauth
 
             <!--DESLOGADO-->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClienteEndereco;
 use App\Endereco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,17 +12,16 @@ class EnderecoController extends Controller
     public function index()
     {
         $userId = Auth::user()->id;
-        $enderecos = Endereco::where([
+        $clienteEnderecos = ClienteEndereco::where([
             'user_id'  => "$userId"
             ])->get();
-        return view('cliente.enderecos', compact('enderecos'));
+        return view('cliente.enderecos', compact('clienteEnderecos'));
     }
 
     public function store(Request $request)
     {
-        $userId = Auth::user()->id;
         $endereco = new Endereco();
-        $endereco->user_id = $userId;
+        $endereco->cep = $request->input('cep');
         $endereco->rua = $request->input('rua');
         $endereco->numero = $request->input('numero');
         $endereco->complemento = $request->input('complemento');
@@ -30,6 +30,13 @@ class EnderecoController extends Controller
         $endereco->uf = $request->input('uf');
         $endereco->tipo = $request->input('tipo');
         $endereco->save();
+
+        $userId = Auth::user()->id;
+        $clienteEndereco = new ClienteEndereco();
+        $clienteEndereco->user_id = $userId;
+        $clienteEndereco->endereco_id = $endereco->id;
+        $clienteEndereco->save();
+
         return back();
     }
 
@@ -37,7 +44,8 @@ class EnderecoController extends Controller
     {
         $endereco = Endereco::find($id);
         if(isset($endereco)){
-            $endereco->delete();
+            $endereco->ativo = false;
+            $endereco->save();
         }
         return back();
     }

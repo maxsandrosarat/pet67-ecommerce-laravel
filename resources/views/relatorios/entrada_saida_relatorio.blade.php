@@ -30,6 +30,7 @@
             </form>
             </div>
             <br/>
+            <div class="table-responsive-xl">
             <table id="yesprint" class="table table-striped table-ordered table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -56,6 +57,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             @endif
         </div>
         <div class="card-footer">

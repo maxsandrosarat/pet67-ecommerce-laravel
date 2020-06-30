@@ -3,6 +3,7 @@
 @section('body')
 
 <div class="container">
+
     <h3>Produtos no carrinho</h3>
     <div scope="row">
         @if (Session::has('mensagem-sucesso'))
@@ -22,6 +23,7 @@
                 <h5 scope="col"> Pedido: {{ $pedido->id }} </h5>
                 <h5 scope="col"> Criado em: {{ $pedido->created_at->format('d/m/Y H:i') }} </h5>
             </div>
+            <div class="table-responsive-xl">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -34,9 +36,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $total_pedido = 0;
-                    @endphp
                     @foreach ($pedido->pedido_produtos as $pedido_produto)
 
                     <tr>
@@ -65,7 +64,6 @@
                         <td>R$ {{ number_format($pedido_produto->descontos, 2, ',', '.') }}</td>
                         @php
                             $total_produto = $pedido_produto->valores - $pedido_produto->descontos;
-                            $total_pedido += $total_produto;
                         @endphp
                         @if($pedido_produto->produto->granel=="1")
                         <td><input name="total" readonly id="total" value="R$ {{ number_format($total_produto, 2, ',', '.') }}"/></td>
@@ -76,35 +74,44 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             <div scope="row">
                 <strong >Total do pedido: </strong>
-                <span scope="col">R$ {{ number_format($total_pedido, 2, ',', '.') }}</span>
+                <span scope="col">R$ {{ number_format($pedido->total, 2, ',', '.') }}</span>
             </div>
+            <br/>
             <div scope="row">
                 <form method="POST" action="{{ route('carrinho.desconto') }}">
                     @csrf
                     <input type="hidden" name="pedido_id" value="{{ $pedido->id }}">
-                    <strong >Cupom de desconto: </strong>
-                    <input  type="text" name="cupom">
-                    <button type="submit" class="btn btn-primary">Validar</button>
+                    <label>Cupom de Desconto: 
+                    <input class="form-control" name="cupom" type="text" id="cupom" size="20" required/></label>
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Validar Cupom</button>
                 </form>
             </div>
             <br/>
             <div>
                 <a type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Voltar a página inicial para continuar comprando?" href="{{ route('index') }}">Continuar comprando</a>
                 <br/><br/>
-                @if(count($enderecos)==0)
+                @if(count($clienteEnderecos)==0)
                 <h5>Nenhum Endereço Cadastrado</h5>
                 <a class="btn btn-primary" href="/enderecos">Cadastrar Endereço</a>
                 @else
                 <form method="POST" action="{{ route('carrinho.concluir') }}">
                     @csrf
                     <input type="hidden" name="pedido_id" value="{{ $pedido->id }}">
-                    <h6>Selecione endereço para entrega:</h6>
-                    @foreach ($enderecos as $endereco)
-                    <input type="radio" id="endereco{{$endereco->id}}" name="endereco" value="{{$endereco->id}}" required>
-                    <label for="endereco{{$endereco->id}}">{{$endereco->rua}}, {{$endereco->numero}} ({{$endereco->complemento}}) - {{$endereco->bairro}} - {{$endereco->cidade}} - {{$endereco->uf}}</label>
+                    <h5>Selecione endereço para entrega:</h5>
+                    @foreach ($clienteEnderecos as $end)
+                    @if($end->endereco->ativo==true)
+                    <div class="form-check">
+                    <input type="radio" class="form-check-input" id="endereco{{$end->endereco->id}}" name="endereco" value="{{$end->endereco->id}}" required>
+                    <label for="endereco{{$end->endereco->id}}">{{$end->endereco->rua}}, {{$end->endereco->numero}} ({{$end->endereco->complemento}}) - {{$end->endereco->bairro}} - {{$end->endereco->cidade}} - {{$end->endereco->uf}}</label>
+                    </div>
+                    @endif
                     @endforeach
+                    <br/>
+                    <textarea class="form-control" name="observacao" id="observacao" placeholder="Observação"></textarea>
                     <br/>
                     <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Adquirir os produtos concluindo a compra?">
                         Concluir compra
@@ -118,7 +125,9 @@
         @endforelse
     </div>
 </div>
-
+<h5>Ajude-nos a manter contato, cadastre seus telefones 
+    <a type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Cadastrar Novo Telefone" href="/telefones">Cadastrar Telefone</a>
+</h5>
 <form id="form-remover-produto" method="POST" action="{{ route('carrinho.remover') }}">
     @csrf
     {{ method_field('DELETE') }}
@@ -134,7 +143,7 @@
     @csrf
     <input type="hidden" name="id">
     <input type="hidden" name="qtd">
-    <input type="hidden" name="preco">
+    <input type="hidden" name="total">
 </form>
 
 @endsection
