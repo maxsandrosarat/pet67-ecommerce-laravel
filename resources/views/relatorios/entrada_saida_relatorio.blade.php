@@ -5,27 +5,35 @@
         <div class="card-body">
             <h5 class="card-title">Relatório de Entradas/Saídas</h5>
             @if(count($rels)==0)
-                <br/><br/>
-                <div class="alert alert-danger" role="alert">
-                    Sem movimentações!
-                </div>
+                    <div class="alert alert-dark" role="alert">
+                        @if($view=="inicial")
+                        Sem movimentos cadastrados!
+                        @else @if($view=="filtro")
+                        Sem resultados da busca!
+                        <a href="/admin/relatorios/estoque" class="btn btn-success">Voltar</a>
+                        @endif
+                        @endif
+                    </div>
             @else
             <div class="card border">
             <h5>Filtros: </h5>
-            <form class="form-inline my-2 my-lg-0" method="GET" action="/relatorios/estoque/filtro">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="/admin/relatorios/estoque/filtro">
                 @csrf
-                <label for="tipo">Tipo</label>
-                <select id="tipo" name="tipo">
+                <select class="custom-select" id="tipo" name="tipo">
                     <option value="">Selecione o tipo</option>
                     <option value="entrada">Entrada</option>
                     <option value="saida">Saída</option>
                 </select>
-                <label for="produto">Produto</label>
-                <input class="form-control mr-sm-2" type="number" placeholder="Código do Produto" name="produto">
-                <label for="dataInicio">Data Início</label>
-                <input class="form-control mr-sm-2" type="date" name="dataInicio">
-                <label for="dataFim">Data Fim</label>
-                <input class="form-control mr-sm-2" type="date" name="dataFim">
+                <select class="custom-select" id="produtos" name="produto">
+                    <option value="">Selecione um produto</option>
+                    @foreach ($prods as $prod)
+                    <option value="{{$prod->id}}">{{$prod->nome}} {{$prod->tipo_animal->nome}} @if($prod->tipo_fase=='filhote') Filhote @else @if($prod->tipo_fase=='adulto') Adulto @else @if($prod->tipo_fase=='castrado') Castrado @endif @endif @endif {{$prod->marca->nome}} @if($prod->embalagem!="Unidade") {{$prod->embalagem}} @endif</option>
+                    @endforeach
+                </select>
+                <label for="dataInicio">Data Início
+                <input class="form-control mr-sm-2" type="date" name="dataInicio"></label>
+                <label for="dataFim">Data Fim
+                <input class="form-control mr-sm-2" type="date" name="dataFim"></label>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar</button>
             </form>
             </div>
@@ -40,7 +48,7 @@
                         <th>Nome Produto</th>
                         <th>Quantidade</th>
                         <th>Usuário</th>
-                        <th>Data</th>
+                        <th>Data & Hora</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,7 +60,7 @@
                         <td>{{$rel->produto->nome}} {{$rel->produto->tipo_animal->nome}} @if($rel->produto->tipo_fase=='filhote') Filhote @else @if($rel->produto->tipo_fase=='adulto') Adulto @else @if($rel->produto->tipo_fase=='castrado') Castrado @endif @endif @endif {{$rel->produto->marca->nome}} @if($rel->produto->embalagem!="Unidade") {{$rel->produto->embalagem}} @endif</td>
                         <td>{{$rel->quantidade}}</td>
                         <td>{{$rel->usuario}}</td>
-                        <td>{{date("d/m/Y", strtotime($rel->data))}}</td>
+                        <td>{{date("d/m/Y H:i", strtotime($rel->created_at))}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -65,5 +73,5 @@
         </div>
     </div>
     <br/>
-    <a href="/estoque" class="btn btn-success">Voltar</a>
+    <a href="/admin/relatorios" class="btn btn-success"data-toggle="tooltip" data-placement="bottom" title="Voltar"><i class="material-icons white">reply</i></a>
 @endsection

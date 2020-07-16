@@ -30,11 +30,17 @@ Route::get('/enderecos/apagar/{id}', 'EnderecoController@destroy');
 Route::get('/telefones', 'TelefoneController@index');
 Route::post('/telefones', 'TelefoneController@store');
 Route::get('/telefones/apagar/{id}', 'TelefoneController@destroy');
+Route::get('/meuPerfil', 'HomeController@meuPerfil')->name('cliente.meuPerfil');
+Route::post('/meuPerfil', 'HomeController@meuPerfilEdit');
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/login', 'Auth\AdminLoginController@index')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/meuPerfil', 'AdminController@meuPerfil')->name('admin.meuPerfil');
+    Route::post('/meuPerfil', 'AdminController@meuPerfilEdit');
+    Route::get('/novo', 'AdminController@cadastroAdmin');
+    Route::post('/novo', 'AdminController@novoAdmin');
     Route::get('/cadastros', 'AdminController@cadastros');
 
     Route::group(['prefix' => 'images'], function() {

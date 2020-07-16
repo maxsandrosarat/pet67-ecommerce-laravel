@@ -27,7 +27,7 @@
                                 <br/>
                                 <h5>Descrição do Serviço</h5>
                                 <br/>
-                                <textarea name="descricao" id="descricao" rows="10" cols="40" maxlength="500" placeholder="Breve resumo do serviço"></textarea>
+                                <textarea class="form-control" name="descricao" id="descricao" rows="10" cols="40" maxlength="500" placeholder="Breve resumo do serviço"></textarea>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -100,7 +100,7 @@
                                                 <br/>
                                                 <h5>Descrição do Serviço</h5>
                                                 <br/>
-                                                <textarea name="descricao" id="descricao" rows="10" cols="40" maxlength="500">{{$serv->descricao}}</textarea>
+                                                <textarea class="form-control" name="descricao" id="descricao" rows="10" cols="40" maxlength="500">{{$serv->descricao}}</textarea>
                                             </div>
                                     </div>
                                     <div class="modal-footer">

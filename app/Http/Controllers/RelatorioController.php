@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\EntradaSaida;
+use App\Produto;
 
 class RelatorioController extends Controller
 {
@@ -19,8 +20,10 @@ class RelatorioController extends Controller
 
     public function estoque()
     {
-        $rels = EntradaSaida::orderBy('data','desc')->orderBy('id','desc')->paginate(10);
-        return view('relatorios.entrada_saida_relatorio', compact('rels'));
+        $prods = Produto::where('ativo',true)->orderBy('nome')->get();
+        $rels = EntradaSaida::orderBy('created_at','desc')->orderBy('id','desc')->paginate(10);
+        $view = "inicial";
+        return view('relatorios.entrada_saida_relatorio', compact('view','prods','rels'));
     }
 
     public function estoque_filtro(Request $request)
@@ -70,6 +73,8 @@ class RelatorioController extends Controller
                 }
             }
         }
-        return view('relatorios.entrada_saida_relatorio', compact('rels'));
+        $prods = Produto::where('ativo',true)->orderBy('nome')->get();
+        $view = "filtro";
+        return view('relatorios.entrada_saida_relatorio', compact('view','prods','rels'));
     }
 }

@@ -15,27 +15,27 @@
                 <form class="form-inline my-2 my-lg-0" method="GET" action="/admin/estoque/filtro">
                     @csrf
                     <input class="form-control mr-sm-2" type="text" placeholder="Nome do Produto" name="nome">
-                    <select id="categoria" name="categoria">
-                        <option value="">Selecione uma categoria</option>
+                    <select class="custom-select" id="categoria" name="categoria">
+                        <option value="">Categoria</option>
                         @foreach ($cats as $cat)
                             <option value="{{$cat->id}}">{{$cat->nome}}</option>
                         @endforeach
                     </select>
-                    <select id="tipo" name="tipo">
-                        <option value="">Selecione um tipo</option>
+                    <select class="custom-select" id="tipo" name="tipo">
+                        <option value="">Tipo Animal</option>
                         @foreach ($tipos as $tipo)
                             <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
                         @endforeach
                     </select>
-                    <select id="fase" name="fase">
-                        <option value="">Selecione uma fase</option>
+                    <select class="custom-select" id="fase" name="fase">
+                        <option value="">Fase Animal</option>
                         <option value="filhote">Filhote</option>
                         <option value="adulto">Adulto</option>
                         <option value="castrado">Castrado</option>
                         <option value="todas">Todas</option>
                     </select>
-                    <select id="marca" name="marca">
-                        <option value="">Selecione uma marca</option>
+                    <select class="custom-select" id="marca" name="marca">
+                        <option value="">Marca</option>
                         @foreach ($marcas as $marca)
                             <option value="{{$marca->id}}">{{$marca->nome}}</option>
                         @endforeach

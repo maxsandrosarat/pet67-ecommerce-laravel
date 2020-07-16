@@ -15,12 +15,11 @@ class CreateEntradaSaidasTable extends Migration
     {
         Schema::create('entrada_saidas', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo');
+            $table->enum('tipo',['entrada','saida']);
             $table->unsignedBigInteger('produto_id');
             $table->foreign('produto_id')->references('id')->on('produtos');
             $table->integer('quantidade');
             $table->string('usuario');
-            $table->date('data');
             $table->timestamps();
         });
     }

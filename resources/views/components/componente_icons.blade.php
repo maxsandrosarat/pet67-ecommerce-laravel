@@ -13,7 +13,7 @@
           <div class="modal-body">
             <h5 class="icon fa-phone"/> (67) 3385-4316 <a href="tel:6733854316" type="button" class="btn btn-primary">Ligar</a><br/>
             <h5 class="icon fa-whatsapp"/> (67) 99143-0321 <a href="https://api.whatsapp.com/send?phone=5567991430321&text=Digite%20sua%20mensagem" type="button" class="btn btn-success">Mandar Mensagem</a><br/>
-            <h5 class="icon fa-envelope-o"/> sac.pet67@gmail.com <br/> <br/> Mande sua sugestão ou reclamação <a href="mailto:sac.pet67@gmail.com" type="button" class="btn btn-danger">Mandar um e-mail</a>
+            <h5 class="icon fa-envelope"/> sac.pet67@gmail.com <br/> <br/> Mande sua sugestão ou reclamação <a href="mailto:sac.pet67@gmail.com" type="button" class="btn btn-danger">Mandar um e-mail</a>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -21,10 +21,10 @@
         </div>
       </div>
     </div>
-    <a href="https://www.facebook.com/Pet067/" target="_blank" class="icon fa-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"><span class="label">Facebook</span></a>
+    <a href="https://www.facebook.com/Pet067/" target="_blank" class="icon fa-facebook-f" data-toggle="tooltip" data-placement="bottom" title="Facebook"><span class="label">Facebook</span></a>
     <a href="https://www.instagram.com/pet67_/" target="_blank" class="icon fa-instagram" data-toggle="tooltip" data-placement="bottom" title="Instagram"><span class="label">Instagram</span></a>
     <!-- Button trigger modal -->
-    <a href="#" class="icon fa-map-marker" data-toggle="modal" data-target="#exampleModa3" data-toggle="tooltip" data-placement="bottom" title="Localização"><span class="label">Localização</span></a>
+    <a href="#" class="icon fa-map-marker-alt" data-toggle="modal" data-target="#exampleModa3" data-toggle="tooltip" data-placement="bottom" title="Localização"><span class="label">Localização</span></a>
     <!-- Modal -->
     <div class="modal fade" id="exampleModa3" tabindex="-1" role="dialog" aria-labelledby="exampleModa2Label" aria-hidden="true">
       <div class="modal-dialog" role="document">

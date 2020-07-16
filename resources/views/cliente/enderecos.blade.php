@@ -51,7 +51,6 @@
                 </div>
             </div>
             @if(count($clienteEnderecos)==0)
-                <br/><br/>
                 <div class="alert alert-danger" role="alert">
                     Sem endereços cadastrados!
                 </div>

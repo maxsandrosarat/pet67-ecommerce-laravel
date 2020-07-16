@@ -141,7 +141,7 @@ class CarrinhoController extends Controller
         $pedidoProduto->save();
         
 
-        $request->session()->flash('mensagem-sucesso', 'Produto adicionado ao carrinho com sucesso!');
+        $request->session()->flash('mensagem-sucesso', 'Produto Granel adicionado ao carrinho com sucesso!');
 
         return redirect()->route('carrinho.index');
 
@@ -376,13 +376,26 @@ class CarrinhoController extends Controller
             return redirect()->route('carrinho.index');
         }
 
+        $pedidosUser = Pedido::where('user_id',"$idusuario")->get();
+        $pedidoIds = array();
+        foreach($pedidosUser as $pedidoUser){
+            $pedidoIds[] = $pedidoUser->id;
+        }
+
         $cupom = CupomDesconto::where([
             'localizador' => $cupom,
             'ativo'       => '1'
-            ])->where('validade', '>', date('Y-m-d'))->first();
+            ])->where('validade', '>', date('Y-m-d H:i'))->first();
 
         if( empty($cupom->id) ) {
-            $req->session()->flash('mensagem-falha', 'Cupom de desconto não encontrado!');
+            $req->session()->flash('mensagem-falha', 'Cupom de desconto esgotado ou não encontrado!');
+            return redirect()->route('carrinho.index');
+        }
+
+        $check_cupons = PedidoProduto::whereIn('pedido_id',$pedidoIds)->where('cupom_desconto_id',"$cupom->id")->exists();
+
+        if( $check_cupons ) {
+            $req->session()->flash('mensagem-falha', 'Cupom já utilizado em outro pedido!');
             return redirect()->route('carrinho.index');
         }
 
@@ -464,7 +477,7 @@ class CarrinhoController extends Controller
         }
 
         if( $aplicou_desconto ) {
-            $req->session()->flash('mensagem-sucesso', 'Cupom aplicado com sucesso!');
+            $req->session()->flash('mensagem-sucesso', 'Cupom aplicado com sucesso! Lembrando que Cupons não se aplicam em produtos em granel.');
         } else {
             $req->session()->flash('mensagem-falha', 'Cupom esgotado!');
         }

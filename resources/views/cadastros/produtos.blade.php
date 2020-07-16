@@ -32,7 +32,7 @@
                                         <input type="text" class="form-control" name="nome" id="nome" placeholder="Exemplo: Ração" required>
                                         <br/>
                                         <label for="tipo">Tipo de Animal</label>
-                                        <select id="tipo" name="tipo" required>
+                                        <select class="custom-select" id="tipo" name="tipo" required>
                                             <option value="">Selecione o tipo do animal</option>
                                             @foreach ($tipos as $tipo)
                                                 <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
@@ -40,7 +40,7 @@
                                         </select>
                                         <br/><br/>
                                         <label for="fase">Fase do Animal:</label>
-                                        <select id="fase" name="fase" required>
+                                        <select class="custom-select" id="fase" name="fase" required>
                                             <option value="">Selecione a fase do animal</option>
                                             <option value="filhote">Filhote</option>
                                             <option value="adulto">Adulto</option>
@@ -49,7 +49,7 @@
                                         </select>
                                         <br/><br/>
                                         <label for="marca">Marca</label>
-                                        <select id="marca" name="marca" required>
+                                        <select class="custom-select" id="marca" name="marca" required>
                                             <option value="">Selecione a marca do produto</option>
                                             @foreach ($marcas as $marca)
                                                 <option value="{{$marca->id}}">{{$marca->nome}}</option>
@@ -66,7 +66,7 @@
                                         <input type="number" class="form-control" name="estoque" id="estoque" placeholder="Exemplo: 100" required>
                                         <br/>
                                         <label for="categoria">Categoria</label>
-                                        <select id="categoria" name="categoria" required>
+                                        <select class="custom-select" id="categoria" name="categoria" required>
                                             <option value="">Selecione</option>
                                             @foreach ($cats as $cat)
                                                 <option value="{{$cat->id}}">{{$cat->nome}}</option>
@@ -108,27 +108,27 @@
                 <form class="form-inline my-2 my-lg-0" method="GET" action="/admin/produtos/filtro">
                     @csrf
                     <input class="form-control mr-sm-2" type="text" placeholder="Nome do Produto" name="nome">
-                    <select id="categoria" name="categoria">
-                        <option value="">Selecione uma categoria</option>
+                    <select class="custom-select" id="categoria" name="categoria">
+                        <option value="">Categoria</option>
                         @foreach ($cats as $cat)
                             <option value="{{$cat->id}}">{{$cat->nome}}</option>
                         @endforeach
                     </select>
-                    <select id="tipo" name="tipo">
-                        <option value="">Selecione um tipo</option>
+                    <select class="custom-select" id="tipo" name="tipo">
+                        <option value="">Tipo Animal</option>
                         @foreach ($tipos as $tipo)
                             <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
                         @endforeach
                     </select>
-                    <select id="fase" name="fase">
-                        <option value="">Selecione uma fase</option>
+                    <select class="custom-select" id="fase" name="fase">
+                        <option value="">Fase Animal</option>
                         <option value="filhote">Filhote</option>
                         <option value="adulto">Adulto</option>
                         <option value="castrado">Castrado</option>
                         <option value="todas">Todas</option>
                     </select>
-                    <select id="marca" name="marca">
-                        <option value="">Selecione uma marca</option>
+                    <select class="custom-select" id="marca" name="marca">
+                        <option value="">Marca</option>
                         @foreach ($marcas as $marca)
                             <option value="{{$marca->id}}">{{$marca->nome}}</option>
                         @endforeach
@@ -209,7 +209,7 @@
                                                         <input type="text" class="form-control" name="nome" id="nome" value="{{$prod->nome}}" required>
                                                         <br/>
                                                         <label for="tipo">Tipo de Animal</label>
-                                                        <select id="tipo" name="tipo" required>
+                                                        <select class="custom-select" id="tipo" name="tipo" required>
                                                             <option value="{{$prod->tipo_animal->id}}">{{$prod->tipo_animal->nome}}</option>
                                                             @foreach ($tipos as $tipo)
                                                                 @if($tipo->id==$prod->tipo_animal->id)
@@ -220,7 +220,7 @@
                                                         </select>
                                                         <br/><br/>
                                                         <label for="fase">Fase do Animal:</label>
-                                                        <select id="fase" name="fase">
+                                                        <select class="custom-select" id="fase" name="fase">
                                                             <option value="{{$prod->tipo_fase}}">@if($prod->tipo_fase=="filhote") Filhote @else @if($prod->tipo_fase=="adulto") Adulto @else @if($prod->tipo_fase=="castrado") Castrado @else @if($prod->tipo_fase=="todas") Todas @endif @endif @endif @endif</option>
                                                             @if($prod->tipo_fase=="filhote")
                                                             <option value="adulto">Adulto</option>
@@ -248,7 +248,7 @@
                                                         </select>
                                                         <br/><br/>
                                                         <label for="marca">Marca</label>
-                                                        <select id="marca" name="marca" required>
+                                                        <select class="custom-select" id="marca" name="marca" required>
                                                             <option value="{{$prod->marca->id}}">{{$prod->marca->nome}}</option>
                                                             @foreach ($marcas as $marca)
                                                                 @if($marca->id==$prod->marca->id)
@@ -268,7 +268,7 @@
                                                         <input type="number" class="form-control" name="estoque" id="estoque" value="{{$prod->estoque}}" required>
                                                         <br><br/>
                                                         <label for="categoria">Categoria</label>
-                                                        <select id="categoria" name="categoria" required>
+                                                        <select  class="custom-select" id="categoria" name="categoria" required>
                                                             <option value="{{$prod->categoria->id}}">{{$prod->categoria->nome}}</option>
                                                             @foreach ($cats as $cat)
                                                                 @if($cat->id==$prod->categoria->id)

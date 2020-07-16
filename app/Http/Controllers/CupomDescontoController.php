@@ -27,7 +27,7 @@ class CupomDescontoController extends Controller
         $cupom->modo_desconto = $request->input('modo_desconto');
         $cupom->limite = $request->input('limite');
         $cupom->modo_limite = $request->input('modo_limite');
-        $cupom->validade = $request->input('validade');
+        $cupom->validade = $request->input('dataValidade').' '.$request->input('horaValidade');
         $cupom->ativo = $request->input('ativo');
         $cupom->save();
         return redirect('/admin/cuponsDesconto');
@@ -55,8 +55,8 @@ class CupomDescontoController extends Controller
         {
             $cupom->modo_limite = $request->input('modo_limite');
         }
-        if($request->input('validade')!=""){
-            $cupom->validade = $request->input('validade');
+        if($request->input('dataValidade')!=""){
+            $cupom->validade = $request->input('dataValidade').' '.$request->input('horaValidade');
         }
         if($request->input('ativo')!=""){
             $cupom->ativo = $request->input('ativo');

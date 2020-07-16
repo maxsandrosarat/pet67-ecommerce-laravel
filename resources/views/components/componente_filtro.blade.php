@@ -38,6 +38,13 @@
                         @endforeach
                     </select>
                     <br/><br/>
+                    <label for="granel">Produto em Granel:</label>
+                    <select id="granel" name="granel">
+                        <option value="">__Selecione__</option>
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
+                    </select>
+                    <br/><br/>
                     <input class="form-control mr-sm-2" type="text" size="15" placeholder="Nome do Produto" name="nome" id="nome">
                     <br/><br/>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
@@ -45,4 +52,4 @@
             </div>
         </div>
     </div>
-</div>
+  </div>

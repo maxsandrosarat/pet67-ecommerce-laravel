@@ -21,7 +21,7 @@ class CreateCupomDescontosTable extends Migration
             $table->enum('modo_desconto', ['valor','porc'])->default('porc');
             $table->decimal('limite',6,2)->default(0);
             $table->enum('modo_limite', ['valor','qtd'])->default('qtd');
-            $table->date('validade');
+            $table->dateTime('validade');
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });

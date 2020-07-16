@@ -4,6 +4,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                @if(session('mensagem'))
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <h5>{{session('mensagem')}}</h5>
+                </div>
+                @endif
                 <div class="card-header">Administrador</div>
 
                 <div class="card-body">
@@ -11,7 +17,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">E-mail</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -25,7 +31,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Senha</label>
 
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
@@ -48,7 +54,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        Lembrar Login
                                     </label>
                                 </div>
                             </div>
@@ -62,7 +68,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        Esqueceu sua senha?
                                     </a>
                                 @endif
                             </div>

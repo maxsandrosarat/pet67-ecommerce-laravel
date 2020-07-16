@@ -33,9 +33,9 @@
                                         <br/>
                                         <h5>Descrição do Animal</h5>
                                         <br/>
-                                        <textarea name="descricao" id="descricao" rows="10" cols="40" maxlength="500" placeholder="Resumo ou Curiosidade sobre o Animal"></textarea>
-                                        <label for="preco">Preço do Animal</label>
-                                        <input type="text" class="form-control" name="preco" id="preco" placeholder="Exemplo: 10.5" required>
+                                        <textarea class="form-control" name="descricao" id="descricao" rows="10" cols="40" maxlength="500" placeholder="Resumo ou Curiosidade sobre o Animal"></textarea>
+                                        <label for="preco">Preço do Animal
+                                        <input type="text" class="form-control" name="preco" id="preco" placeholder="Exemplo: 10.5" required></label>
                                         <br/>
                                         <h5>Ativo?</h5>
                                         <input type="radio" id="sim" name="ativo" value="1" required>
@@ -136,13 +136,12 @@
                                                         <b style="font-size: 80%;">Aceito apenas Imagens JPG e PNG (".jpg" e ".png")</b>
                                                         <label for="nome">Nome do Animal</label>
                                                         <input type="text" class="form-control" name="nome" id="nome" value="{{$animal->nome}}" required>
-                                                        <label for="nome">Nome do Animal</label>
                                                         <br/>
                                                         <h5>Descrição do Animal</h5>
                                                         <br/>
-                                                        <textarea name="descricao" id="descricao" rows="10" cols="40" maxlength="500">{{$animal->descricao}}</textarea>
-                                                        <label for="preco">Preço do Animal</label>
-                                                        <input type="text" class="form-control" name="preco" id="preco" value="{{$animal->preco}}" required>
+                                                        <textarea class="form-control" name="descricao" id="descricao" rows="10" cols="40" maxlength="500">{{$animal->descricao}}</textarea>
+                                                        <label for="preco">Preço do Animal
+                                                        <input type="text" class="form-control" name="preco" id="preco" value="{{$animal->preco}}" required></label>
                                                         <br/>
                                                         <h5>Ativo?</h5>
                                                         <input type="radio" id="sim" name="ativo" value="1" @if($animal->ativo=="1") checked @endif required>
