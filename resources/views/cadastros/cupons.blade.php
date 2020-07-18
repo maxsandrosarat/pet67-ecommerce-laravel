@@ -34,7 +34,7 @@
                                 <label for="desconto">Desconto
                                 <input type="text" class="form-control" name="desconto" id="desconto" placeholder="Exemplo: 20" required></label>
                                 <br/>
-                                <label for="modo_limite">Modo de limite
+                                <!--<label for="modo_limite">Modo de limite
                                 <select class="custom-select" name="modo_limite" required="required">
                                     <option value="">-- Selecione</option>
                                     <option value="qtd">Quantidade de desconto</option>
@@ -42,7 +42,7 @@
                                 </select></label>
                                 
                                 <label for="limite">Limite desconto
-                                <input type="text" class="form-control" name="limite" id="limite" required="required"></label>
+                                <input type="text" class="form-control" name="limite" id="limite" required="required"></label>-->
                                 <br/>
                                 <label for="validade">Data Validade
                                 <input type="date" class="form-control" name="dataValidade" id="validade"  required="required"></label>
@@ -75,7 +75,7 @@
                         <th>Nome</th>
                         <th>Localizador</th>
                         <th>Desconto</th>
-                        <th>Limite</th>
+                        <!--<th>Limite</th>-->
                         <th>Validade</th>
                         <th>Ativo</th>
                         <th>Ações</th>
@@ -88,7 +88,7 @@
                         <td>{{$cupom->nome}}</td>
                         <td>{{$cupom->localizador}}</td>
                         <td>@if($cupom->modo_desconto == 'valor')R$ {{$cupom->desconto}} @else {{$cupom->desconto}}% @endif</td>
-                        <td>@if($cupom->modo_limite == 'valor')R$ {{$cupom->limite}}@else {{$cupom->desconto}} qtd @endif</td>
+                        <!--<td>@if($cupom->modo_limite == 'valor')R$ {{$cupom->limite}}@else {{$cupom->desconto}} qtd @endif</td>-->
                         <td>{{date("d/m/Y H:i", strtotime($cupom->validade))}}</td>
                         <td>@if($cupom->ativo=="1") SIM @else NÃO @endif</td>
                         <td>
@@ -117,16 +117,20 @@
 
                                                 <label for="modo_desconto">Modo de desconto
                                                 <select class="custom-select" name="modo_desconto" required="required">
-                                                    <option value="{{$cupom->modo_desconto}}">-- Selecione</option>
+                                                    <option value="{{$cupom->modo_desconto}}">@if($cupom->modo_desconto=="porc") Porcentagem no valor do produto @else Valor fixo @endif</option>
+                                                    @if($cupom->modo_desconto=="valor")
                                                     <option value="porc">Porcentagem no valor do produto</option>
+                                                    @endif
+                                                    @if($cupom->modo_desconto=="porc")
                                                     <option value="valor">Valor fixo</option>
+                                                    @endif
                                                 </select></label>
                                                 
                                                 
                                                 <label for="desconto">Desconto
                                                 <input type="text" class="form-control" name="desconto" id="desconto" value="{{$cupom->desconto}}" required></label>
 
-                                                <label for="modo_limite">Modo de limite
+                                                <!--<label for="modo_limite">Modo de limite
                                                 <select class="custom-select" name="modo_limite" required="required">
                                                     <option value="{{$cupom->modo_limite}}">-- Selecione</option>
                                                     <option value="qtd">Quantidade de desconto</option>
@@ -135,7 +139,7 @@
                                                 
                                                 
                                                 <label for="limite">Limite desconto
-                                                <input type="text" class="form-control" name="limite" id="limite" value="{{$cupom->limite}}" required="required"></label>
+                                                <input type="text" class="form-control" name="limite" id="limite" value="{{$cupom->limite}}" required="required"></label>-->
                                                 
                                                 <br/>
                                                 <label for="validade">Data Validade

@@ -24,7 +24,6 @@
     <style>
         body{
             padding: 20px;
-            background-color: white;
         }
         .container{
             margin-top: 20px;

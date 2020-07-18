@@ -10,6 +10,7 @@ use App\Produto;
 use App\PedidoProduto;
 use App\CupomDesconto;
 use App\Endereco;
+use App\EntradaSaida;
 
 class CarrinhoController extends Controller
 {
@@ -36,6 +37,11 @@ class CarrinhoController extends Controller
         $produto = Produto::find($idproduto);
         if( empty($produto->id) ) {
             $request->session()->flash('mensagem-falha', 'Produto não encontrado em nossa loja!');
+            return redirect()->route('carrinho.index');
+        }
+
+        if( $produto->estoque<1 ) {
+            $request->session()->flash('mensagem-falha', 'Produto sem mais estoque no momento!');
             return redirect()->route('carrinho.index');
         }
 
@@ -70,7 +76,27 @@ class CarrinhoController extends Controller
         $pedidoProduto->status = 'RESERV';
         $pedidoProduto->save();
 
-        
+        $prod = Produto::find("$idproduto");
+        if(isset($prod)){
+            if($prod->granel==1){
+
+            } else {
+            $user = Auth::user();
+            $es = new EntradaSaida();
+            $es->tipo = "saida";
+            $es->produto_id = $idproduto;
+            $es->quantidade = 1;
+            $es->usuario = $user->name;
+            $es->motivo = "Venda Online";
+            $es->save();
+            $prod->estoque -= 1;
+            $prod->save();
+            }
+        }
+
+        $user = Auth::user();
+        $user->carrinho += 1;
+        $user->save();
 
         $request->session()->flash('mensagem-sucesso', 'Produto adicionado ao carrinho com sucesso!');
 
@@ -156,7 +182,7 @@ class CarrinhoController extends Controller
         $idproduto          = $request->input('produto_id');
         $remove_apenas_item = (boolean)$request->input('item');
         $idusuario          = Auth::user()->id;
-
+        $qtdProd            = 0;
         $idpedido = Pedido::consultaId([
             'id'      => $idpedido,
             'user_id' => $idusuario,
@@ -179,8 +205,40 @@ class CarrinhoController extends Controller
             return redirect()->route('carrinho.index');
         }
 
+        if($request->input('item')==0) {
+            $qtdProd = PedidoProduto::where([
+                'pedido_id'  => $idpedido,
+                'produto_id' => $idproduto
+            ])->count();
+            $prod = Produto::find($idproduto);
+            if(isset($prod)){
+                if($prod->granel==1){
+                    $user = Auth::user();
+                    $user->carrinho -= 1;
+                    $user->save();
+                } else {
+                    $user = Auth::user();
+                    $es = new EntradaSaida();
+                    $es->tipo = "entrada";
+                    $es->produto_id = $idproduto;
+                    $es->quantidade = $qtdProd;
+                    $es->usuario = $user->name;
+                    $es->motivo = "Devolução Online";
+                    $es->save();
+                    $prod->estoque += $qtdProd;
+                    $prod->save();
+                    $user = Auth::user();
+                    $user->carrinho -= $qtdProd;
+                    $user->save();
+                }
+            }
+        }
+
         if( $remove_apenas_item ) {
             $where_produto['id'] = $produto->id;
+            $user = Auth::user();
+            $user->carrinho -= 1;
+            $user->save();
         }
         PedidoProduto::where($where_produto)->delete();
 
@@ -201,6 +259,18 @@ class CarrinhoController extends Controller
             } else {
                 $pedido->total -= $prod->preco;
                 $pedido->save();
+                if(isset($prod)){
+                    $user = Auth::user();
+                    $es = new EntradaSaida();
+                    $es->tipo = "entrada";
+                    $es->produto_id = $idproduto;
+                    $es->quantidade = 1;
+                    $es->usuario = $user->name;
+                    $es->motivo = "Devolução Online";
+                    $es->save();
+                }
+                $prod->estoque += 1;
+                $prod->save();
             }
         }
 
@@ -252,6 +322,19 @@ class CarrinhoController extends Controller
             ])->update([
                 'status' => 'FEITO'
             ]);
+
+            $user = Auth::user();
+            $user->carrinho = 0;
+            $user->save();
+
+        $pedProds = PedidoProduto::where(['pedido_id' => $idpedido])->get();
+        foreach($pedProds as $pedProd){
+            $prod = Produto::find($pedProd->produto_id);
+            if($prod->granel==1 && $pedProd->qtdGranel==0){
+                $pedProd->qtdGranel = 1;
+                $pedProd->save();
+            }
+        }
 
         $request->session()->flash('mensagem-sucesso', 'Pedido concluído com sucesso!');
         $enderecos = Endereco::all();
@@ -320,6 +403,18 @@ class CarrinhoController extends Controller
 
         foreach ($produtos as $prods) {
             $prod = Produto::find($prods->produto_id);
+            if(isset($prod)){
+                $user = Auth::user();
+                $es = new EntradaSaida();
+                $es->tipo = "entrada";
+                $es->produto_id = $prods->produto_id;
+                $es->quantidade = 1;
+                $es->usuario = $user->name;
+                $es->motivo = "Cancelamento Online";
+                $es->save();
+                $prod->estoque += 1;
+                $prod->save();
+            }
             $pedido = Pedido::find($prods->pedido_id);
             if($prod->granel==true){
                 $pedido->total -= $prods->valor;

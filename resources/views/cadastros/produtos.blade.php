@@ -264,9 +264,9 @@
                                                         <label for="preco">Preço do Produto</label>
                                                         <input type="text" class="form-control" name="preco" id="preco" value="{{$prod->preco}}" required>
                                                         <br/>
-                                                        <label for="estoque">Estoque do Produto</label>
+                                                        <!--<label for="estoque">Estoque do Produto</label>
                                                         <input type="number" class="form-control" name="estoque" id="estoque" value="{{$prod->estoque}}" required>
-                                                        <br><br/>
+                                                        <br><br/>-->
                                                         <label for="categoria">Categoria</label>
                                                         <select  class="custom-select" id="categoria" name="categoria" required>
                                                             <option value="{{$prod->categoria->id}}">{{$prod->categoria->nome}}</option>

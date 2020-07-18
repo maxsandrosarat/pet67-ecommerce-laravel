@@ -55,6 +55,8 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/feitos', 'AdminController@pedidos_feitos');
         Route::get('/pagos', 'AdminController@pedidos_pagos');
         Route::get('/cancelados', 'AdminController@pedidos_cancelados');
+        Route::get('/reservados', 'AdminController@pedidos_reservados');
+        Route::get('/reservados/liberar/{id}', 'AdminController@liberar_produto_reservado');
         Route::get('/pagar/{id}', 'AdminController@pagar_pedido');
         Route::get('/cancelar/{id}', 'AdminController@cancelar_pedido');
     });
@@ -114,6 +116,13 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/', 'RelatorioController@index');
         Route::get('/estoque', 'RelatorioController@estoque');
         Route::get('/estoque/filtro', 'RelatorioController@estoque_filtro');
+        Route::get('/vendas', 'RelatorioController@indexVendas');
+        Route::get('/vendas/produtos', 'RelatorioController@vendasProdutos');
+        Route::get('/vendas/produtos/filtro', 'RelatorioController@vendasProdutosFiltro');
+        Route::get('/vendas/clientes', 'RelatorioController@vendasClientes');
+        Route::get('/vendas/clientes/filtro', 'RelatorioController@vendasClientesFiltro');
+        Route::get('/vendas/clientesProdutos', 'RelatorioController@vendasClientesProdutos');
+        Route::get('/vendas/clientesProdutos/filtro', 'RelatorioController@vendasClientesProdutosFiltro');
     });
 
     Route::group(['prefix' => 'animais'], function() {

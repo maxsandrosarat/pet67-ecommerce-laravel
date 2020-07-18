@@ -4,7 +4,7 @@
                                 <a href="#">Olá, {{Auth::user()->name}}</a>
                             </div>
                             <div class="links2">
-                                <a href="{{ route('carrinho.index') }}">Carrinho</a>
+                                <a href="{{ route('carrinho.index') }}">Carrinho <span class="badge badge-secondary">{{ Auth::user()->carrinho }}</span></a>
                             </div>
                             <div class="links2">
                                 <a href="/compras">Minhas compras</a>

@@ -18,11 +18,11 @@
             <li @if($current=="home") class="nav-item active" @else class="nav-item" @endif>
                 <a class="nav-link" href="/home">Principal</a>
             </li>
+            <li @if($current=="carrinho") class="nav-item active" @else class="nav-item" @endif>
+                <a class="nav-link" href="{{ route('carrinho.index') }}">@if($current=="carrinho")<i class="material-icons white">shopping_cart</i><span class="badge badge-success">{{ Auth::user()->carrinho }}@else <i class="material-icons grey">shopping_cart</i><span class="badge badge-secondary">{{ Auth::user()->carrinho }}@endif</span></a>
+            </li>
             <li @if($current=="compras") class="nav-item active" @else class="nav-item" @endif>
                 <a class="nav-link" href="/compras">Minhas Compras</a>
-            </li>
-            <li @if($current=="carrinho") class="nav-item active" @else class="nav-item" @endif>
-                <a class="nav-link" href="{{ route('carrinho.index') }}">Carrinho</a>
             </li>
             <li @if($current=="enderecos") class="nav-item active" @else class="nav-item" @endif>
                 <a class="nav-link" href="/enderecos">Meus Endereços</a>

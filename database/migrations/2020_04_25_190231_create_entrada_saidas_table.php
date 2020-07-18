@@ -20,6 +20,7 @@ class CreateEntradaSaidasTable extends Migration
             $table->foreign('produto_id')->references('id')->on('produtos');
             $table->integer('quantidade');
             $table->string('usuario');
+            $table->string('motivo')->nullable();
             $table->timestamps();
         });
     }

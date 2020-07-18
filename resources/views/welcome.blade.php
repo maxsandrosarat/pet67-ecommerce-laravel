@@ -10,7 +10,7 @@
                   <form class="form-inline my-2 my-lg-0" method="GET" action="/busca">
                       @csrf
                       <label for="categoria">Categoria:</label>
-                      <select id="categoria" name="categoria">
+                      <select class="custom-select" id="categoria" name="categoria">
                           <option value="">__Selecione__</option>
                           @foreach ($cats as $cat)
                           <option value="{{$cat->id}}">{{$cat->nome}}</option>
@@ -18,7 +18,7 @@
                       </select>
                       <br/><br/>
                       <label for="tipo">Tipo do Animal:</label>
-                      <select id="tipo" name="tipo">
+                      <select class="custom-select" id="tipo" name="tipo">
                           <option value="">__Selecione__</option>
                           @foreach ($tipos as $tipo)
                           <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
@@ -26,7 +26,7 @@
                       </select>
                       <br/><br/>
                       <label for="fase">Fase do Animal:</label>
-                      <select id="fase" name="fase">
+                      <select class="custom-select" id="fase" name="fase">
                           <option value="">__Selecione__</option>
                           <option value="filhote">Filhote</option>
                           <option value="adulto">Adulto</option>
@@ -35,7 +35,7 @@
                       </select>
                       <br/><br/>
                       <label for="marca">Marca do Produto:</label>
-                      <select id="marca" name="marca">
+                      <select class="custom-select" id="marca" name="marca">
                           <option value="">__Selecione__</option>
                           @foreach ($marcas as $marca)
                           <option value="{{$marca->id}}">{{$marca->nome}}</option>
@@ -43,7 +43,7 @@
                       </select>
                       <br/><br/>
                       <label for="granel">Produto em Granel:</label>
-                      <select id="granel" name="granel">
+                      <select class="custom-select" id="granel" name="granel">
                           <option value="">__Selecione__</option>
                           <option value="1">Sim</option>
                           <option value="0">Não</option>

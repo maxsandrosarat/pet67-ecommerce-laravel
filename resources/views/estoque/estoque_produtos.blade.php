@@ -104,13 +104,20 @@
                                                 <form action="/admin/estoque/entrada/{{$prod->id}}" method="POST">
                                                     @csrf
                                                     <div class="form-group">
-                                                        <h6>Produto Selecionado:</h6>
+                                                        <h5>Produto Selecionado:</h5>
                                                         <h5>{{$prod->nome}} {{$prod->tipo_animal->nome}} @if($prod->tipo_fase=='filhote') Filhote @else @if($prod->tipo_fase=='adulto') Adulto @else @if($prod->tipo_fase=='castrado') Castrado @endif @endif @endif {{$prod->marca->nome}} @if($prod->embalagem!="Unidade") {{$prod->embalagem}} @endif</h5>
-                                                        <h6>Quantidade atual:</h6>
+                                                        <h5>Quantidade atual:</h5>
                                                         <h5>{{$prod->estoque}}</h5>
                                                         <input type="hidden" name="produto" value="{{$prod->id}}">
-                                                        <label for="qtd">Quantidade de Entrada</label>
-                                                        <input type="number" id="qtd" name="qtd" required>
+                                                        <label for="qtd">Quantidade de Entrada
+                                                        <input class="form-control" type="number" id="qtd" name="qtd" required></label>
+                                                        <h5>Motivo:</h5>
+                                                        <select class="custom-select" id="motivo" name="motivo" required>
+                                                            <option value="">Selecione um motivo</option>
+                                                            <option value="Reposição">Reposição</option>
+                                                            <option value="Devolução">Devolução</option>
+                                                            <option value="Outros">Outros</option>
+                                                        </select>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-primary btn-sn">Salvar</button>
@@ -141,13 +148,20 @@
                                                 <form action="/admin/estoque/saida/{{$prod->id}}" method="POST">
                                                     @csrf
                                                     <div class="form-group">
-                                                        <h6>Produto Selecionado:</h6>
+                                                        <h5>Produto Selecionado:</h5>
                                                         <h5>{{$prod->nome}} {{$prod->tipo_animal->nome}} @if($prod->tipo_fase=='filhote') Filhote @else @if($prod->tipo_fase=='adulto') Adulto @else @if($prod->tipo_fase=='castrado') Castrado @endif @endif @endif {{$prod->marca->nome}} @if($prod->embalagem!="Unidade") {{$prod->embalagem}} @endif</h5>
-                                                        <h6>Quantidade atual:</h6>
+                                                        <h5>Quantidade atual:</h5>
                                                         <h5>{{$prod->estoque}}</h5>
                                                         <input type="hidden" name="produto" value="{{$prod->id}}">
-                                                        <label for="qtd">Quantidade de Saída</label>
-                                                        <input type="number" id="qtd" name="qtd" required>
+                                                        <label for="qtd">Quantidade de Saída
+                                                        <input class="form-control" type="number" id="qtd" name="qtd" required></label>
+                                                        <h5>Motivo:</h5>
+                                                        <select class="custom-select" id="motivo" name="motivo" required>
+                                                            <option value="">Selecione um motivo</option>
+                                                            <option value="Venda Física">Venda Física</option>
+                                                            <option value="Defeito">Defeito</option>
+                                                            <option value="Outros">Outros</option>
+                                                        </select>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-primary btn-sn">Salvar</button>

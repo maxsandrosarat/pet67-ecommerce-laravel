@@ -41,6 +41,7 @@ class EstoqueController extends Controller
                 $es->produto_id = $id;
                 $es->quantidade = $qtd;
                 $es->usuario = $user->name;
+                $es->motivo = $request->input('motivo');
                 $es->save();
                 $prod->estoque += $request->input('qtd');
                 $prod->save();
@@ -63,6 +64,7 @@ class EstoqueController extends Controller
                 $es->produto_id = $id;
                 $es->quantidade = $qtd;
                 $es->usuario = $user->name;
+                $es->motivo = $request->input('motivo');
                 $es->save();
                 $prod->estoque -= $request->input('qtd');
                 $prod->save();

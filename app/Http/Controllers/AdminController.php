@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Admin;
+use App\EntradaSaida;
 use App\Pedido;
 use App\PedidoProduto;
 use App\Produto;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -95,6 +97,52 @@ class AdminController extends Controller
         return view('admin.pedidos_cancelados', compact('cancelados'));
     }
 
+    public function pedidos_reservados()
+    {
+        $rels = PedidoProduto::where('status','RESERV')->orderBy('created_at','desc')->orderBy('id','desc')->get();
+        return view('admin.pedidos_reservados', compact('rels'));
+    }
+
+    public function liberar_produto_reservado($id)
+    {
+        $pedProd = PedidoProduto::find($id);
+        $ped = Pedido::find($pedProd->pedido_id);
+        $ped->update([
+            'status' => 'CANCEL',
+            'total' => 0
+        ]);
+        PedidoProduto::where('pedido_id',"$ped->id")->update([
+            'status' => 'CANCEL',
+            'qtdGranel' => 0,
+            'valor' => 0,
+            'desconto' => 0
+        ]);
+        $produtos = PedidoProduto::where('pedido_id',"$ped->id")->get();
+        foreach ($produtos as $prods) {
+            $prod = Produto::find($prods->produto_id);
+                if(isset($prod)){
+                    if($prod->granel==1){
+
+                    } else {
+                        $user = Auth::user();
+                        $es = new EntradaSaida();
+                        $es->tipo = "entrada";
+                        $es->produto_id = $prods->produto_id;
+                        $es->quantidade = 1;
+                        $es->usuario = $user->name;
+                        $es->motivo = "Liberação Reservado";
+                        $es->save();
+                        $prod->estoque += 1;
+                        $prod->save();
+                    }
+                    $cliente = User::find($ped->user_id);
+                    $cliente->carrinho -= 1;
+                    $cliente->save();
+                }
+        }
+        return back();
+    }
+
     public function pagar_pedido($id){
         $pedido = Pedido::find($id);
         $pedido->status = 'PAGO';
@@ -106,9 +154,6 @@ class AdminController extends Controller
             } else {
                 $produtos->status = 'PAGO';
                 $produtos->update();
-                $produto = Produto::find($produtos->produto_id);
-                $produto->estoque -= 1;
-                $produto->update();
             }
         }
         return back()->with('mensagem-sucesso', 'Pedido pago com sucesso!');
@@ -120,9 +165,22 @@ class AdminController extends Controller
         $pedido->update();
         $pedido_produtos = PedidoProduto::where('pedido_id',"$id")->get();
         foreach($pedido_produtos as $produtos){
-            if($produtos->status == 'PAGO'){
+            if($produtos->status == 'PAGO' || $produtos->status == 'FEITO'){
                 $produto = Produto::find($produtos->produto_id);
-                $produto->estoque += 1;
+                if($produto->granel==1){
+
+                } else {
+                    $user = Auth::user();
+                    $es = new EntradaSaida();
+                    $es->tipo = "entrada";
+                    $es->produto_id = $produtos->produto_id;
+                    $es->quantidade = 1;
+                    $es->usuario = $user->name;
+                    $es->motivo = "Cancelamento Pedido";
+                    $es->save();
+                    $produto->estoque += 1;
+                    $produto->save();
+                }
             }
             $produtos->status = 'CANCEL';
             $produtos->update();

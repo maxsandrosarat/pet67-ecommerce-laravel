@@ -22,5 +22,9 @@ class PedidoProduto extends Model
     {
         return $this->belongsTo('App\Pedido', 'pedido_id', 'id');
     }
+
+    public function cupom_desconto(){
+        return $this->belongsTo('App\CupomDesconto');
+    }
     
 }

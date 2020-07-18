@@ -45,7 +45,7 @@
                         <td class="center-align" width="160">
                             <div class="center-align">
                                 @if($pedido_produto->produto->granel=="1")
-                                    <input name="qtd" id="qtd" onblur="granel({{ $pedido_produto->produto_id }})" @if($pedido_produto->qtdGranel>0) value="{{ number_format($pedido_produto->qtdGranel, 1, ',', '.') }}" @else placeholder="Exemplo: 0,5" @endif>
+                                    <input class="form-control" name="qtd" id="qtd" onblur="granel({{ $pedido_produto->produto_id }})" @if($pedido_produto->qtdGranel>0) value="{{ number_format($pedido_produto->qtdGranel, 1, ',', '.') }}" @else placeholder="Exemplo: 0,5" @endif required>
                                     <br/>
                                 @else
                                 <a class="col l4 m4 s4" href="#" onclick="carrinhoRemoverProduto({{ $pedido->id }}, {{ $pedido_produto->produto_id }}, 1 )">
@@ -66,7 +66,7 @@
                             $total_produto = $pedido_produto->valores - $pedido_produto->descontos;
                         @endphp
                         @if($pedido_produto->produto->granel=="1")
-                        <td><input name="total" readonly id="total" value="R$ {{ number_format($total_produto, 2, ',', '.') }}"/></td>
+                        <td><input class="form-control" name="total" readonly id="total" value="R$ {{ number_format($total_produto, 2, ',', '.') }}"/></td>
                         @else
                         <td>R$ {{ number_format($total_produto, 2, ',', '.') }}</td>
                         @endif
@@ -128,6 +128,10 @@
 <h5>Ajude-nos a manter contato, cadastre seus telefones 
     <a type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Cadastrar Novo Telefone" href="/telefones">Cadastrar Telefone</a>
 </h5>
+@if(isset($qtdProd))
+{{var_dump($qtdProd)}}
+@endif
+
 <form id="form-remover-produto" method="POST" action="{{ route('carrinho.remover') }}">
     @csrf
     {{ method_field('DELETE') }}
