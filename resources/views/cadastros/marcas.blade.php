@@ -42,6 +42,7 @@
                     <tr>
                         <th>Código</th>
                         <th>Nome</th>
+                        <th>Ativo</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -50,6 +51,7 @@
                     <tr>
                         <td style="text-align: center;">{{$marca->id}}</td>
                         <td style="text-align: center;">{{$marca->nome}}</td>
+                        <td>@if($marca->ativo=='1') Sim @else Não @endif</td>
                         <td style="text-align: center;">
                             <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal{{$marca->id}}" data-toggle="tooltip" data-placement="left" title="Editar">
                                 <i class="material-icons md-48">edit</i>
@@ -70,6 +72,12 @@
                                             <div class="form-group">
                                                 <label for="nome">Nome da Marca</label>
                                                 <input type="text" class="form-control" name="nome" id="nome" value="{{$marca->nome}}" required>
+                                                <br/>
+                                                <h5>Ativo?</h5>
+                                                <input type="radio" id="sim" name="ativo" value="1" @if($marca->ativo=="1") checked @endif required>
+                                                <label for="sim">Sim</label>
+                                                <input type="radio" id="nao" name="ativo" value="0" @if($marca->ativo=="0") checked @endif required>
+                                                <label for="nao">Não</label>
                                             </div>
                                     </div>
                                     <div class="modal-footer">
@@ -79,7 +87,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <a href="/admin/marcas/apagar/{{$marca->id}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Excluir"><i class="material-icons md-48">delete</i></a>
+                            <a href="/admin/marcas/apagar/{{$marca->id}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Inativar"><i class="material-icons md-48">delete</i></a>
                         </td>
                     </tr>
                     @endforeach

@@ -31,6 +31,7 @@ class MarcaController extends Controller
         $marca = Marca::find($id);
         if(isset($marca)){
             $marca->nome = $request->input('nome');
+            $marca->ativo = $request->input('ativo');
             $marca->save();
         }
         return back();
@@ -40,7 +41,8 @@ class MarcaController extends Controller
     {
         $marca = Marca::find($id);
         if(isset($marca)){
-            $marca->delete();
+            $marca->ativo = false;
+            $marca->save();
         }
         return back();
     }

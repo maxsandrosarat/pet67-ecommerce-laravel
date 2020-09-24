@@ -73,9 +73,9 @@
                                             @endforeach
                                         </select>
                                         <h5>Ativo?</h5>
-                                        <input type="radio" id="sim" name="ativo" value="sim" required>
+                                        <input type="radio" id="sim" name="ativo" value="1" required>
                                         <label for="sim">Sim</label>
-                                        <input type="radio" id="nao" name="ativo" value="nao" required>
+                                        <input type="radio" id="nao" name="ativo" value="0" required>
                                         <label for="nao">Não</label>
                                         <h5>Granel?</h5>
                                         <input type="radio" id="sim" name="granel" value="1" required>
@@ -303,7 +303,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <a href="/admin/produtos/apagar/{{$prod->id}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Excluir"><i class="material-icons md-48">delete</i></a>
+                            <a href="/admin/produtos/apagar/{{$prod->id}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Inativar"><i class="material-icons md-48">delete</i></a>
                         </td>
                     </tr>
                     @endforeach

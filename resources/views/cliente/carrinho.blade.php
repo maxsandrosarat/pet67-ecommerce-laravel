@@ -101,7 +101,7 @@
                 <form method="POST" action="{{ route('carrinho.concluir') }}">
                     @csrf
                     <input type="hidden" name="pedido_id" value="{{ $pedido->id }}">
-                    <h5>Selecione endereço para entrega:</h5>
+                    <h5>Selecione um endereço para entrega:</h5>
                     @foreach ($clienteEnderecos as $end)
                     @if($end->endereco->ativo==true)
                     <div class="form-check">
@@ -110,6 +110,33 @@
                     </div>
                     @endif
                     @endforeach
+                    <h5>Selecione a forma da entrega:</h5>
+                    @foreach ($entregas as $ent)
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="entrega{{$ent->id}}" name="entrega" value="{{$ent->id}}" required>
+                        <labelfor="entrega{{$ent->id}}">{{$ent->descricao}} - Valor: R$ {{ number_format($ent->valor, 2, ',', '.')}}</label>
+                    </div>
+                    @endforeach
+                    <h5>Selecione a forma de pagamento:</h5>
+                    <div class="form-check">
+                    <select class="custom-select" id="selectPagamento" name="pagamento" required>
+                    <option value="">Selecione uma forma de pagamento</option>
+                    @foreach ($pagamentos as $pagamento)
+                        <option value="{{$pagamento->id}}">{{$pagamento->descricao}}</option>
+                    @endforeach
+                    </select>
+                    <select class="custom-select" id="selectTipoPagamento" name="tipoPagamento" required>
+                        <option value="">Selecione o tipo de pagamento</option>
+                        <option value="presencial">Presencial</option>
+                        <option value="online">Online</option>
+                    </select>
+                    <div id="troco">
+                        <div id="online">
+                        </div>
+                        <div id="presencial">
+                            <input class="form-control" type="number" name="troco" id="troco" placeholder="Troco para quanto? Caso não precise, ignore este campo.">
+                        </div>
+                    </div>
                     <br/>
                     <textarea class="form-control" name="observacao" id="observacao" placeholder="Observação"></textarea>
                     <br/>

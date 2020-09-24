@@ -161,7 +161,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <a href="/admin/cuponsDesconto/apagar/{{$cupom->id}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Excluir"><i class="material-icons md-48">delete</i></a>
+                            <a href="/admin/cuponsDesconto/apagar/{{$cupom->id}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Inativar"><i class="material-icons md-48">delete</i></a>
                         </td>
                     </tr>
                     @endforeach

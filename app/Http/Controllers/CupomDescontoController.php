@@ -30,7 +30,7 @@ class CupomDescontoController extends Controller
         $cupom->validade = $request->input('dataValidade').' '.$request->input('horaValidade');
         $cupom->ativo = $request->input('ativo');
         $cupom->save();
-        return redirect('/admin/cuponsDesconto');
+        return back();
     }
 
     public function update(Request $request, $id)
@@ -62,15 +62,16 @@ class CupomDescontoController extends Controller
             $cupom->ativo = $request->input('ativo');
         }
         $cupom->save();
-        return redirect('/admin/cuponsDesconto');
+        return back();
     }
 
     public function destroy($id)
     {
-        $cupom = Anuncio::find($id);
+        $cupom = CupomDesconto::find($id);
         if(isset($ancupomuncio)){
-            $cupom->delete();
+            $cupom->ativo = false;
+            $cupom->save();
         }
-        return redirect('/admin/cuponsDesconto');
+        return back();
     }
 }

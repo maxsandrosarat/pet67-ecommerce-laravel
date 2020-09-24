@@ -31,6 +31,7 @@ class TipoAnimalController extends Controller
         $tipo = TipoAnimal::find($id);
         if(isset($tipo)){
             $tipo->nome = $request->input('nome');
+            $tipo->ativo = $request->input('ativo');
             $tipo->save();
         }
         return back();
@@ -40,7 +41,8 @@ class TipoAnimalController extends Controller
     {
         $tipo = TipoAnimal::find($id);
         if(isset($tipo)){
-            $tipo->delete();
+            $tipo->ativo = false;
+            $tipo->save();
         }
         return back();
     }

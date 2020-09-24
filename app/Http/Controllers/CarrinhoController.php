@@ -11,6 +11,8 @@ use App\PedidoProduto;
 use App\CupomDesconto;
 use App\Endereco;
 use App\EntradaSaida;
+use App\Entrega;
+use App\FormaPagamento;
 
 class CarrinhoController extends Controller
 {
@@ -26,7 +28,9 @@ class CarrinhoController extends Controller
         $clienteEnderecos = ClienteEndereco::where([
             'user_id'  => "$userId"
             ])->get();
-        return view('cliente.carrinho', compact('pedidos','clienteEnderecos'));
+        $entregas = Entrega::where('ativo',true)->get();
+        $pagamentos = FormaPagamento::where('ativo',true)->get();
+        return view('cliente.carrinho', compact('pedidos','clienteEnderecos','entregas','pagamentos'));
     }
 
     public function adicionar(Request $request)
@@ -285,11 +289,21 @@ class CarrinhoController extends Controller
 
         $idpedido  = $request->input('pedido_id');
         $idendereco  = $request->input('endereco');
+        $identrega  = $request->input('entrega');
+        $idpagamento  = $request->input('pagamento');
+        $tipoPagamento  = $request->input('tipoPagamento');
+        $troco  = $request->input('troco');
         $observacao  = $request->input('observacao');
         $idusuario = Auth::user()->id;
 
         $pedido = Pedido::find($idpedido);
         $pedido->endereco_id = $idendereco;
+        $pedido->forma_pagamento_id = $idpagamento;
+        $pedido->tipoPagamento = $tipoPagamento;
+        if($request->input('troco')!=""){
+        $pedido->troco = $troco;
+        }   
+        $pedido->entrega_id = $identrega;
         $pedido->observacao = $observacao;
         $pedido->update();
 
@@ -343,14 +357,10 @@ class CarrinhoController extends Controller
 
     public function compras()
     {
-
-        $compras = Pedido::where([
-            'status'  => 'FEITO',
+        $compras = Pedido::whereIn('status',['FEITO','PAGO'])->where([
             'user_id' => Auth::user()->id
             ])->orderBy('created_at', 'desc')->get();
-
         return view('cliente.compras', compact('compras'));
-
     }
 
     public function canceladas()
@@ -430,10 +440,7 @@ class CarrinhoController extends Controller
                 'pedido_id' => $idpedido,
                 'status'    => 'FEITO'
             ])->whereIn('id', $idspedido_prod)->update([
-                'status' => 'CANCEL',
-                'qtdGranel' => 0,
-                'valor' => 0,
-                'desconto' => 0
+                'status' => 'CANCEL'
             ]);
 
         $check_pedido_cancel = PedidoProduto::where([

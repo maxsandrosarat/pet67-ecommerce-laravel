@@ -60,11 +60,11 @@
     <div id="produtos" class="col-8">
       @if(count($prods)==0)
             <br/>
-            @if($tipo=="painel")
-            <h5>Sem produtos cadastrados!</h5>
-            @else
-            <h5>Sem resultados para busca!</h5>
-            @endif
+            @if($view=="inicial")
+            <h5>Sem produtos em promoção! <a href="/produtos" class="btn btn-success"data-toggle="tooltip" data-placement="bottom" title="Todos os Produtos">Todos os Produtos</a></h5>
+            @else @if($view=="filtro")
+            <h5>Sem resultados da busca!</h5>
+            @endif @endif
       @else
         @if($pagina=="promocao")<h2 class="promocao">Promoções</h2>@endif
         <h5>Exibindo {{$prods->count()}} de {{$prods->total()}} de Produtos ({{$prods->firstItem()}} a {{$prods->lastItem()}})</h5>

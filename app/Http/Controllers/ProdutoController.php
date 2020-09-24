@@ -19,9 +19,9 @@ class ProdutoController extends Controller
     public function index()
     {
         $prods = Produto::paginate(20);
-        $tipos = TipoAnimal::orderBy('nome')->get();
-        $marcas = Marca::orderBy('nome')->get();
-        $cats = Categoria::orderBy('nome')->get();
+        $tipos = TipoAnimal::where('ativo',true)->orderBy('nome')->get();
+        $marcas = Marca::where('ativo',true)->orderBy('nome')->get();
+        $cats = Categoria::where('ativo',true)->orderBy('nome')->get();
         return view('cadastros.produtos',compact('prods','tipos','marcas','cats'));
     }
 
@@ -120,8 +120,8 @@ class ProdutoController extends Controller
     {
         $prod = Produto::find($id);
         if(isset($prod)){
-            Storage::disk('public')->delete($prod->foto);
-            $prod->delete();
+            $prod->ativo = false;
+            $prod->save();
         }
         return back();
     }
@@ -195,9 +195,9 @@ class ProdutoController extends Controller
             }
         }
         
-        $tipos = TipoAnimal::orderBy('nome')->get();
-        $marcas = Marca::orderBy('nome')->get();
-        $cats = Categoria::orderBy('nome')->get();
+        $tipos = TipoAnimal::where('ativo',true)->orderBy('nome')->get();
+        $marcas = Marca::where('ativo',true)->orderBy('nome')->get();
+        $cats = Categoria::where('ativo',true)->orderBy('nome')->get();
         return view('cadastros.produtos',compact('prods','tipos','marcas','cats'));
     }
 }

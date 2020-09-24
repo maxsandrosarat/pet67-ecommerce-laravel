@@ -105,6 +105,20 @@ Route::group(['prefix' => 'admin'], function() {
         Route::post('/{id}', 'AnuncioController@update');
     });
 
+    Route::group(['prefix' => 'formasPagamento'], function() {
+        Route::get('/', 'FormaPagamentoController@index');
+        Route::post('/', 'FormaPagamentoController@store');
+        Route::post('/editar/{id}', 'FormaPagamentoController@update');
+        Route::get('/apagar/{id}', 'FormaPagamentoController@destroy');
+    });
+
+    Route::group(['prefix' => 'entregas'], function() {
+        Route::get('/', 'EntregaController@index');
+        Route::post('/', 'EntregaController@store');
+        Route::post('/editar/{id}', 'EntregaController@update');
+        Route::get('/apagar/{id}', 'EntregaController@destroy');
+    });
+
     Route::group(['prefix' => 'estoque'], function() {
         Route::get('/', 'EstoqueController@index');
         Route::get('/filtro', 'EstoqueController@filtro');

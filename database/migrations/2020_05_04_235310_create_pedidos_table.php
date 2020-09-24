@@ -22,6 +22,12 @@ class CreatePedidosTable extends Migration
             $table->enum('status',['RESERV','FEITO','PAGO','CANCEL']);
             $table->float('total');
             $table->string('observacao')->nullable();
+            $table->unsignedBigInteger('forma_pagamento_id')->nullable();
+            $table->foreign('forma_pagamento_id')->references('id')->on('forma_pagamentos');
+            $table->enum('tipoPagamento',['presencial','online'])->nullable();
+            $table->float('troco')->default(0);
+            $table->unsignedBigInteger('entrega_id')->nullable();
+            $table->foreign('entrega_id')->references('id')->on('entregas');
             $table->timestamps();
         });
     }

@@ -129,11 +129,22 @@
                 <div class="d-flex justify-content-center centralizado">
                     <div class="card border-primary text-center" style="width: 255px;">
                         <div class="card-body">
-                            <h5>Vacinas</h5>
+                            <h5>Formas de Pagamento</h5>
                             <p class="card-text">
-                                Cadastre suas vacinas! 
+                                Cadastre suas formas de pagamento! 
                             </p>
-                            <a href="/admin/vacinas" class="btn btn-primary">Gerenciar</a>
+                            <a href="/admin/formasPagamento" class="btn btn-primary">Gerenciar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center centralizado">
+                    <div class="card border-primary text-center" style="width: 255px;">
+                        <div class="card-body">
+                            <h5>Formas de Entrega</h5>
+                            <p class="card-text">
+                                Cadastre suas formas de entrega! 
+                            </p>
+                            <a href="/admin/entregas" class="btn btn-primary">Gerenciar</a>
                         </div>
                     </div>
                 </div>

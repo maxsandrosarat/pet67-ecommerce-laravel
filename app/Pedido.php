@@ -38,4 +38,11 @@ class Pedido extends Model
         return $this->belongsTo('App\Endereco');
     }
 
+    public function entrega(){
+        return $this->belongsTo('App\Entrega');
+    }
+
+    public function forma_pagamento(){
+        return $this->belongsTo('App\FormaPagamento');
+    }
 }

@@ -94,11 +94,19 @@
                                             @endforeach
                                             <tr>
                                                 <td colspan="1">Entrega:</td>
-                                                <td colspan="4"><b>{{$pedido->endereco->rua}}, {{$pedido->endereco->numero}}@if($pedido->endereco->complemento!="") ({{$pedido->endereco->complemento}}) @else @endif- {{$pedido->endereco->bairro}} - {{$pedido->endereco->cidade}} - {{$pedido->endereco->uf}}</b>
+                                                <td colspan="4"><b>{{$pedido->endereco->rua}}, {{$pedido->endereco->numero}}@if($pedido->endereco->complemento!="") ({{$pedido->endereco->complemento}}) @else @endif- {{$pedido->endereco->bairro}} - {{$pedido->endereco->cidade}} - {{$pedido->endereco->uf}} ({{$pedido->entrega->descricao}} - Valor: R$ {{ number_format($pedido->entrega->valor, 2, ',', '.')}})</b>
                                                     @if($pedido->observacao!="")
                                                     <br/>
                                                     Observação: {{$pedido->observacao}}
                                                     @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="1">Pagamento:</td>
+                                                <td colspan="4"><b>{{$pedido->forma_pagamento->descricao}} - @if($pedido->tipoPagamento=="presencial") Presencial @else Online @endif
+                                                    @if($pedido->troco!="")
+                                                    - Troco: R$ {{ number_format($pedido->troco, 2, ',', '.') }}
+                                                    @endif </b>
                                                 </td>
                                             </tr>
                                         </tbody>

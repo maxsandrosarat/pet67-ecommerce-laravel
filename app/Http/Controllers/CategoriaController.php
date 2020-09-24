@@ -31,6 +31,7 @@ class CategoriaController extends Controller
         $cat = Categoria::find($id);
         if(isset($cat)){
             $cat->nome = $request->input('nomeCategoria');
+            $cat->ativo = $request->input('ativo');
             $cat->save();
         }
         return back();
@@ -40,7 +41,8 @@ class CategoriaController extends Controller
     {
         $cat = Categoria::find($id);
         if(isset($cat)){
-            $cat->delete();
+            $cat->ativo = false;
+            $cat->save();
         }
         return back();
     }

@@ -16,26 +16,26 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $tipo = "painel";
+        $view = "inicial";
         $pagina = "promocao";
         $prods = Produto::where('ativo',true)->where('estoque','>=',1)->where('promocao',true)->paginate(12);
-        $tipos = TipoAnimal::orderBy('nome')->get();
-        $marcas = Marca::orderBy('nome')->get();
-        $cats = Categoria::orderBy('nome')->get();
+        $tipos = TipoAnimal::where('ativo',true)->orderBy('nome')->get();
+        $marcas = Marca::where('ativo',true)->orderBy('nome')->get();
+        $cats = Categoria::where('ativo',true)->orderBy('nome')->get();
         $anuncios = Anuncio::where('ativo',true)->get();
-        return view('welcome',compact('tipo','pagina','prods','tipos','marcas','cats','anuncios'));
+        return view('welcome',compact('view','pagina','prods','tipos','marcas','cats','anuncios'));
     }
 
     public function produtos()
     {
-        $tipo = "painel";
+        $view = "inicial";
         $pagina = "produto";
         $prods = Produto::where('ativo',true)->where('estoque','>=',1)->paginate(12);
-        $tipos = TipoAnimal::orderBy('nome')->get();
-        $marcas = Marca::orderBy('nome')->get();
-        $cats = Categoria::orderBy('nome')->get();
+        $tipos = TipoAnimal::where('ativo',true)->orderBy('nome')->get();
+        $marcas = Marca::where('ativo',true)->orderBy('nome')->get();
+        $cats = Categoria::where('ativo',true)->orderBy('nome')->get();
         $anuncios = Anuncio::where('ativo',true)->get();
-        return view('produtos',compact('tipo','pagina','prods','tipos','marcas','cats','anuncios'));
+        return view('produtos',compact('view','pagina','prods','tipos','marcas','cats','anuncios'));
     }
 
     public function buscar(Request $request)
@@ -299,13 +299,13 @@ class IndexController extends Controller
                 }
             }
         }
-        $tipo = "filtro";
+        $view = "filtro";
         $pagina = "produto";
         $anuncios = Anuncio::where('ativo',true)->get();
-        $tipos = TipoAnimal::all();
-        $marcas = Marca::all();
-        $cats = Categoria::all();
-        return view('produtos',compact('tipo','pagina','prods','tipos','marcas','cats','anuncios'));
+        $tipos = TipoAnimal::where('ativo',true)->orderBy('nome')->get();
+        $marcas = Marca::where('ativo',true)->orderBy('nome')->get();
+        $cats = Categoria::where('ativo',true)->orderBy('nome')->get();
+        return view('produtos',compact('view','pagina','prods','tipos','marcas','cats','anuncios'));
     }
 
     public function animais()
